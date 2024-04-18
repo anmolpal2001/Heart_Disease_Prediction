@@ -1,10 +1,21 @@
 import React from 'react'
 import { useNavigate}from 'react-router-dom'
+import {useDispatch, useSelector} from 'react-redux'
+import {setIsAuth,setIsLogin,setSignUp} from '../store/auth'
 import './Navbar.css'
-function Navbar(props) {
+function Navbar() {
+  const dispatch=useDispatch()
+  const loginPage=useSelector((state)=>state.auth.isLoginPage)
+  const signupPage=useSelector((state)=>state.auth.isSignUpPage)
+  const isAuth=useSelector((state)=>state.auth.isAuth)
     const navigate=useNavigate()
 const onSignUpHandler=()=>{
+  dispatch(setSignUp())
     navigate('sign-up')
+}
+const onLoginHandler=()=>{
+  dispatch(setIsLogin())
+  navigate('sign-in')
 }
   return (
     <div className='navbar'>
@@ -13,8 +24,9 @@ const onSignUpHandler=()=>{
    </div>
    
 
-<button className='getReportBtn' onClick={onSignUpHandler}>SignUp</button>
-
+{signupPage&&<button className='getReportBtn' onClick={onSignUpHandler}>SignUp</button>}
+{loginPage&&<button className='getReportBtn' onClick={onLoginHandler}>Login</button>}
+{isAuth&&<button className='getReportBtn' onClick={onSignUpHandler}>Logout</button>}
     </div>
   )
 }
