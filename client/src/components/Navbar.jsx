@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import logo from '../assets/logo.png'
 const Navbar = () => {
   return (
     <header className={`flex w-full items-center bg-white dark:bg-dark`}>
@@ -8,7 +9,7 @@ const Navbar = () => {
         <div className="w-60 max-w-full px-4">
           <Link to="/" className="block w-full py-5">
             <img
-              src=""
+              src={logo}
               alt="logo"
               className="dark:hidden"
             />
@@ -49,14 +50,14 @@ const Navbar = () => {
           </div>
           <div className="hidden justify-end pr-16 sm:flex lg:pr-0">
             <Link
-              href="sign-in"
+             to="sign-in"
               className="px-7 py-3 text-base font-medium text-dark hover:text-primary dark:text-white"
             >
               Sign in
             </Link>
 
             <Link
-              href="sign-up"
+              to="sign-up"
               className="rounded-md bg-primary px-7 py-3 text-base font-medium text-white hover:bg-primary/90"
             >
               Sign Up
