@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 const Navbar = () => {
   return (
     <header className={`flex w-full items-center bg-white dark:bg-dark`}>
@@ -48,19 +48,19 @@ const Navbar = () => {
             </nav>
           </div>
           <div className="hidden justify-end pr-16 sm:flex lg:pr-0">
-            <a
-              href="/#"
+            <Link
+              href="sign-in"
               className="px-7 py-3 text-base font-medium text-dark hover:text-primary dark:text-white"
             >
               Sign in
-            </a>
+            </Link>
 
-            <a
-              href="/#"
+            <Link
+              href="sign-up"
               className="rounded-md bg-primary px-7 py-3 text-base font-medium text-white hover:bg-primary/90"
             >
               Sign Up
-            </a>
+            </Link>
           </div>
         </div>
       </div>
