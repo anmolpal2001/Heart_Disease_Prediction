@@ -1,4 +1,5 @@
 import React from 'react'
+<<<<<<< HEAD
 import { useNavigate}from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {setIsAuth,setIsLogin,setSignUp} from '../store/auth'
@@ -32,3 +33,13 @@ const onLoginHandler=()=>{
 }
 
 export default Navbar
+=======
+
+const Navbar = () => {
+  return (
+    <div>Navbar</div>
+  )
+}
+
+export default Navbar
+>>>>>>> a1d13f4a563ccdec66a96cd2e6f58374ac2f2909
