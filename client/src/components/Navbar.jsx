@@ -1,72 +1,85 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
+import { NavLink } from 'react-router-dom'
 const Navbar = () => {
   return (
-    <header className={`flex w-full items-center bg-white dark:bg-dark`}>
-    <div className="container">
-      <div className="relative -mx-4 flex items-center justify-between">
-        <div className="w-60 max-w-full px-4">
-          <Link to="/" className="block w-full py-5">
-            <img
-              src={logo}
-              alt="logo"
-              className="dark:hidden"
-            />
-            {/* <img
-              src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg"
-              alt="logo"
-              className="hidden dark:block"
-            /> */}
-          </Link>
-        </div>
-        <div className="flex w-full items-center justify-between px-4">
-          <div>
-            <button
-              onClick={() => setOpen(!open)}
-              id="navbarToggler"
-              className={` ${
-                open && "navbarTogglerActive"
-              } absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden`}
-            >
-              <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
-              <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
-              <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
-            </button>
-            <nav
-              // :className="!navbarOpen && 'hidden' "
-              id="navbarCollapse"
-              className={`absolute right-4 top-full w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:shadow-none lg:dark:bg-transparent ${
-                !open && "hidden"
-              } `}
-            >
-              {/* <ul className="block lg:flex">
-                <ListItem NavLink="/#">Home</ListItem>
-                <ListItem NavLink="/#">Payment</ListItem>
-                <ListItem NavLink="/#">About</ListItem>
-                <ListItem NavLink="/#">Blog</ListItem>
-              </ul> */}
+    <header className="shadow sticky z-50 top-0">
+            <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
+                <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+                    <Link to="/" className="flex items-center">
+                        {/* <img
+                            src={logo}
+                            className="w-full h-32"
+                            alt="Logo"
+                        /> */}
+                        <h1 className="text-2xl font-bold text-gray-800">Logo</h1>
+                    </Link>
+                    <div className="flex items-center lg:order-2">
+                        <Link
+                            to="#"
+                            className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
+                        >
+                            Log in
+                        </Link>
+                        <Link
+                            to="#"
+                            className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
+                        >
+                            Get started
+                        </Link>
+                    </div>
+                    {/* <div
+                        className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
+                        id="mobile-menu-2"
+                    >
+                        <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+                            <li>
+                                <NavLink
+                                to="/"
+                                    className={({isActive}) =>
+                                        `block py-2 pr-4 pl-3 duration-200 ${isActive ? "text-orange-700" : "text-gray-700"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                                    }
+                                >
+                                    Home
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                to="/about"
+                                    className={({isActive}) =>
+                                        `block py-2 pr-4 pl-3 duration-200 ${isActive ? "text-orange-700" : "text-gray-700"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                                    }
+                                >
+                                    About
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                to="/contact"
+                                    className={({isActive}) =>
+                                        `block py-2 pr-4 pl-3 duration-200 ${isActive ? "text-orange-700" : "text-gray-700"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                                    }
+                                >
+                                    Contact
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                to="/github"
+                                    className={({isActive}) =>
+                                        `block py-2 pr-4 pl-3 duration-200 ${isActive ? "text-orange-700" : "text-gray-700"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                                    }
+                                >
+                                    Github
+                                </NavLink>
+                            </li>
+                            
+                        </ul>
+                    </div> */}
+                </div>
             </nav>
-          </div>
-          <div className="hidden justify-end pr-16 sm:flex lg:pr-0">
-            <Link
-             to="sign-in"
-              className="px-7 py-3 text-base font-medium text-dark hover:text-primary dark:text-white"
-            >
-              Sign in
-            </Link>
-
-            <Link
-              to="sign-up"
-              className="rounded-md bg-primary px-7 py-3 text-base font-medium text-white hover:bg-primary/90"
-            >
-              Sign Up
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
+        </header>
 
   )
 }
