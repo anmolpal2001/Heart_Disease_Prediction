@@ -8,12 +8,12 @@ const Navbar = () => {
             <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
                 <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                     <Link to="/" className="flex items-center">
-                        {/* <img
+                        <img
                             src={logo}
-                            className="w-full h-32"
+                            className="w-full h-12"
                             alt="Logo"
-                        /> */}
-                        <h1 className="text-2xl font-bold text-gray-800">Logo</h1>
+                        />
+                        <span>HealthCare</span>
                     </Link>
                     <div className="flex items-center lg:order-2">
                         <Link
