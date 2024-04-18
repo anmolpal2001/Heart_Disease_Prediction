@@ -1,7 +1,6 @@
-const express = require("express");
-const router = express.Router();
-const { test } = require("../controllers/python");
+const test = (req, res) => {
+  res.send("Test route");
+};
 
-router.get("/test", test);
 
-module.exports = router;
+export { test };
