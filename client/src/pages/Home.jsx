@@ -4,7 +4,7 @@ const Home = () => {
   return (
     <div>
       Home
-      <p>hellpooooooo</p>
+      <p>hell000</p>
     </div>
   );
 };
