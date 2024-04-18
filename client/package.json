@@ -14,12 +14,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.1",
-<<<<<<< HEAD
-    "react-router-dom": "^6.22.3"
-=======
     "react-router-dom": "^6.22.3",
     "redux-persist": "^6.0.0"
->>>>>>> a1d13f4a563ccdec66a96cd2e6f58374ac2f2909
+
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
