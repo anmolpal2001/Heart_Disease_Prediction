@@ -8,15 +8,15 @@ const Navbar = () => {
         <div className="w-60 max-w-full px-4">
           <Link to="/" className="block w-full py-5">
             <img
-              src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-primary.svg"
+              src=""
               alt="logo"
               className="dark:hidden"
             />
-            <img
+            {/* <img
               src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg"
               alt="logo"
               className="hidden dark:block"
-            />
+            /> */}
           </Link>
         </div>
         <div className="flex w-full items-center justify-between px-4">
