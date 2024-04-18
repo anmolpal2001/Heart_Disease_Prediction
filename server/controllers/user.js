@@ -11,7 +11,7 @@ const signup = async (req, res) => {
   try {
     const { firstName, lastName, email, password } = req.body;
     const hashedpassword = bcryptjs.hashSync(password, 10);
-    console.log(username, email, password, phone, hashedpassword);
+    console.log(firstName, email, password, lastName);
 
     const data = await User.create({
       firstName,
@@ -19,8 +19,10 @@ const signup = async (req, res) => {
       email,
       password: hashedpassword,
     });
+    data.password=null
     res.status(200).json({
-      status: true,
+      success: true,
+      data:data
     });
   } catch (err) {
     // next(err);
@@ -41,9 +43,9 @@ const signin = async (req, res, next) => {
 
     if (!validUser) return next(errorHandler(404, "User Is Not Available"));
 
-    console.log("he");
+
     const validPass = bcryptjs.compareSync(password, validUser.password);
-    console.log("he");
+    console.log(`email:${email} password:${password}`);
 
     if (!validPass)
       return next(errorHandler(404, "Username and Password Does Not Match"));

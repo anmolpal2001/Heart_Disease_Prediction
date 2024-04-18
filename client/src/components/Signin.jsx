@@ -6,13 +6,26 @@ const Signin = () => {
     email:'',
     password:''
   })
-  const submitHandler=(event)=>{
+  const submitHandler=async(event)=>{
   event.preventDefault()
-  // console.log(data.email +" "+data.password)
+  try{
+
+const res=await fetch('http://localhost:4000/api/v1/auth/signin',{
+  headers:{
+  'Content-Type':'application/json',
+  },
+  method:'POST',
+  body:JSON.stringify(data)
+})
+
   setData(()=> {return {
     email:'',
     password:''
   }})
+}
+catch(err){
+  
+}
   }
   const onChangeHandler=(event)=>{
   setData((prev)=>{

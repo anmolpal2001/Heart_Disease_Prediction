@@ -1,16 +1,35 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { AiOutlineMail } from "react-icons/ai";
+import { AiOutlineMail, AiOutlineRadiusBottomleft } from "react-icons/ai";
 import { BiSolidUser } from "react-icons/bi";
+import{loginStart,loginFailure,loginSuccess} from '../redux/auth/authSlice'
+import { useNavigate } from "react-router-dom";
+import {useDispatch} from 'react-redux'
 const Signup = () => {
+  const dispatch=useDispatch()
+  const navigate=useNavigate()
   const [data,setData]=useState({
     email:'',
     password:'',
     firstName:'',
     lastName:''
   })
-  const submitFormHandler=(event)=>{
+  const submitFormHandler=async(event)=>{
 event.preventDefault()
+try{
+  dispatch(loginStart())
+  const res=await fetch('http://localhost:4000/api/v1/auth/signup',{
+    method:'POST',
+    body:JSON.stringify(data),
+    headers:{
+      'Content-Type':'application/json'
+    }
+  })
+const response=await res.json()
+if(response.success){
+  dispatch(loginSuccess(response.data))
+  navigate('/')
+}
 
 setData(()=>{
   return{
@@ -20,6 +39,10 @@ setData(()=>{
     password:''
   }
 })
+}
+catch(err){
+  console.log(err)
+}
   }
   const changeHandler=(event)=>{
 setData((prev)=>{
