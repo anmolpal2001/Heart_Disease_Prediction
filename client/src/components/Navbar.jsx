@@ -16,7 +16,7 @@ const Navbar = () => {
                         />
                         <h1 className="text-2xl font-bold text-gray-800">HelthCare</h1>
                     </Link>
-                    {location.pathname === "/" && <div className="flex items-center lg:order-2">
+                    {(location.pathname === "/"||location.pathname==='/sign-up') && <div className="flex items-center lg:order-2">
                         <Link
                             to="sign-in"
                             className="text-white bg-[#2A8683]  font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"

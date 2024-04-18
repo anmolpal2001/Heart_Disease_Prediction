@@ -8,7 +8,7 @@ const Signin = () => {
   })
   const submitHandler=(event)=>{
   event.preventDefault()
-  console.log(data.email +" "+data.password)
+  // console.log(data.email +" "+data.password)
   setData(()=> {return {
     email:'',
     password:''
