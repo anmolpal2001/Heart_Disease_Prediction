@@ -18,6 +18,7 @@ const signup = async (req, res) => {
       lastName,
       email,
       password: hashedpassword,
+      profilePic: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName}+${lastName}`,
     });
     data.password=null
     res.status(200).json({

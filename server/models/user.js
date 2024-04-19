@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+// `https://api.dicebear.com/5.x/initials/svg?seed=${firstName}+${lastName}`
 const userSchema = mongoose.Schema(
   {
     firstName: {
@@ -19,10 +19,19 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    photo: {
+    additional_info: {
+      gender : {
+        type : String,
+        required : true
+      },
+      age : {
+        type : String,
+        required : true
+      },
+    },
+    profilePic: {
       type: String,
-      default:
-        "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-social-media-user-vector-default-avatar-profile-icon-social-media-user-vector-portrait-176194876.jpg",
+      required: true,
     },
   },
   { timestamps: true }
