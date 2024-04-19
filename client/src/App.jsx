@@ -5,12 +5,23 @@ import SignUpPage from "./pages/SignUpPage";
 import SignInPage from "./pages/SignInPage";
 import Root from "./pages/Root";
 import Form from "./pages/Form"
+import Private from "./pages/Private";
+
 
 const router = createBrowserRouter([
   {
     path : "/",
     element : <Root />
     ,children:[
+      {
+        element: <Private />,
+        children: [
+          {
+            path: "/form",
+            element: <Form />,
+          },
+        ],
+      },
       {
         index:true,
         element:<Home/>
@@ -23,10 +34,7 @@ const router = createBrowserRouter([
         path : "sign-in",
         element : <SignInPage />
       },
-      {
-        path:"form",
-        element:<Form/>
-      }
+    
     ]
   }
 
