@@ -1,7 +1,12 @@
 import React from "react";
 import logo from "../assets/logo.png";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate=useNavigate()
+  const getReportHandler=(event)=>{
+   navigate('/form')
+  }
   return (
     <div className="bg-[#F7F7F7] border-gray-200 px-4 lg:px-6 py-2.5">
       <div className="mx-auto max-w-screen-xl">
@@ -35,7 +40,7 @@ const Home = () => {
                   guidelines, prioritizing patient safety, confidentiality, and
                   informed
                 </p>
-                <button className="bg-[#2A8683] px-7 py-2 my-8 text-white rounded transition-all duration-300 hover:translate-y-1">
+                <button onClick={getReportHandler}className="bg-[#2A8683] px-7 py-2 my-8 text-white rounded transition-all duration-300 hover:translate-y-1">
                   Get Report
                 </button>
               </div>

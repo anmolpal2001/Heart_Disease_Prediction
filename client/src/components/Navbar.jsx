@@ -1,9 +1,18 @@
 import React from 'react'
 import { Link,useLocation } from 'react-router-dom'
 import logo from '../assets/logo.png'
-import { NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import{useSelector,useDispatch} from 'react-redux'
+import{logout}from '../redux/auth/authSlice'
 const Navbar = () => {
     const location = useLocation();
+    const dispatch=useDispatch()
+    const navigate=useNavigate()
+    const isAuth=useSelector((state)=>state.auth.isAuthenticated)
+    const logoutHandler=()=>{
+dispatch(logout())
+        navigate('/')
+    }
   return (
     <header className="sticky z-50 top-0">
             <nav className="bg-white border-gray-200 px-4 lg:px-6 py-3">
@@ -17,12 +26,20 @@ const Navbar = () => {
                         <h1 className="text-2xl font-bold text-gray-800">HelthCare</h1>
                     </Link>
                     {(location.pathname === "/"||location.pathname==='/sign-up') && <div className="flex items-center lg:order-2">
-                        <Link
+                      { isAuth?(<Link
+                          
+                            className="text-white bg-[#2A8683]  font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
+                        >
+                            <button onClick={logoutHandler}>
+                            Logout
+                            </button>
+                        </Link>):
+                       (<Link
                             to="sign-in"
                             className="text-white bg-[#2A8683]  font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
                         >
                             Get Started
-                        </Link>
+                        </Link>)}
                     </div>}
                     {/* <div
                         className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"

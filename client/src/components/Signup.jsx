@@ -17,7 +17,7 @@ const Signup = () => {
   const submitFormHandler=async(event)=>{
 event.preventDefault()
 try{
-  dispatch(loginStart())
+  // dispatch(loginStart())
   const res=await fetch('http://localhost:4000/api/v1/auth/signup',{
     method:'POST',
     body:JSON.stringify(data),
@@ -27,7 +27,7 @@ try{
   })
 const response=await res.json()
 if(response.success){
-  dispatch(loginSuccess(response.data))
+  // dispatch(loginSuccess(response.data))
   navigate('/')
 }
 
@@ -158,6 +158,7 @@ setData((prev)=>{
               </div>
               <div className="flex w-full">
                 <button
+               
                   type="submit"
                   className="py-2 px-4  bg-[#2A8683]  text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
                 >
