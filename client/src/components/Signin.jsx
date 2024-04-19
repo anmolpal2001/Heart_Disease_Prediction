@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-
+import { Link,useNavigate } from "react-router-dom";
+import {useDispatch} from 'react-redux'
+import {loginSuccess}from '../redux/auth/authSlice'
 const Signin = () => {
+  const navigate=useNavigate()
+  const dispatch=useDispatch()
   const [data,setData]=useState({
     email:'',
     password:''
@@ -17,6 +20,12 @@ const res=await fetch('http://localhost:4000/api/v1/auth/signin',{
   method:'POST',
   body:JSON.stringify(data)
 })
+const response=await res.json()
+// console.log(response)
+if(response.success){
+dispatch(loginSuccess(response.sendData))
+navigate('/')
+}
 
   setData(()=> {return {
     email:'',
