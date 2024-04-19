@@ -18,6 +18,7 @@ const signup = async (req, res) => {
       lastName,
       email,
       password: hashedpassword,
+      profilePic: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName}+${lastName}`,
     });
     data.password=null
     res.status(200).json({
@@ -52,7 +53,7 @@ const signin = async (req, res, next) => {
 
     const { password: userPass, ...sendData } = validUser._doc;
 
-    const token = jwt.sign({ id: validUser._id }, process.env.JWT);
+    const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
 
     const expiryDate = new Date((Date.now() / 1000 + 60 * 60 * 24 * 10) * 1000);
     // const expiryDate = new Date((Date.now() / 1000 + 60) * 1000);

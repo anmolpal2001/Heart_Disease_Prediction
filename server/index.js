@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import userRoutes from "./routes/user.js";
+import heartRoutes from "./routes/heart.js"
 import connectDB from "./config/database.js";
 import cors from 'cors'
 const app = express();
@@ -15,6 +16,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/auth", userRoutes);
+app.use("/api/v1/heart",heartRoutes);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
