@@ -2,6 +2,7 @@ import User from "../models/user.js";
 import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utils/error.js";
 import jwt from "jsonwebtoken";
+import { sendMail } from "../utils/sendMail.js";
 
 const test = (req, res) => {
   res.send("Test route");
@@ -103,7 +104,7 @@ const forgetPassword = async (req, res) => {
 
     const linkForChangePassword = `${process.env.CLIENT_URL}/reset-password/${validUser._id}/${token}`;
     console.log(linkForChangePassword);
-
+    await sendMail(email,'Reset Password',linkForChangePassword)
     return res.status(200).json({
       success: true,
       message: "Link for change password has been sent to your email",
