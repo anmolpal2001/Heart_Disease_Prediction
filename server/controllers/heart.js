@@ -52,7 +52,7 @@ const predict = async (req, res) => {
           target : outputJson.messageCode,
         })
 
-        user.previoudResults.push(heartData._id);
+        user.previousResults.push(heartData._id);
         await user.save();
 
         // Return the output along with status 200

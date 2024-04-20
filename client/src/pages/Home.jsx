@@ -56,7 +56,7 @@ navigate('/reports')
                 onClick={getReportHistory}
                 className="bg-[#2A8683] px-7 py-2 my-8 ml-10 text-white rounded transition-all duration-300 hover:translate-y-1"
               >
-                Report History
+                Get All Records
               </button>}
               </div>
             </div>
