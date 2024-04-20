@@ -41,7 +41,7 @@ function Form() {
           Form Details
         </div>
 
-        <form className="mt-5" onSubmit={submitHandler}>
+        <form onSubmit={submitHandler} className="my-5">
           <div className="flex-col justify-evenly items-start w-full px-4 md:flex md:flex-row md:px-0">
             <div className="m-3">
               <div className="my-3">
