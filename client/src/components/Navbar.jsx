@@ -64,7 +64,7 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
-          ) : (
+          ) : location.pathname === "/" && (
             <div className="flex items-center lg:order-2">
               <Link
                 to="sign-in"

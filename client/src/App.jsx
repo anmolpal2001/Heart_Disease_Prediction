@@ -6,21 +6,13 @@ import SignInPage from "./pages/SignInPage";
 import Root from "./pages/Root";
 import Form from "./pages/Form";
 import Private from "./pages/Private";
+import PageNotFound from "./pages/404";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
     children: [
-      // {
-      //   element: <Private />,
-      //   children: [
-      //     {
-      //       path: "/form",
-      //       element: <Form />,
-      //     },
-      //   ],
-      // },
       {
         index: true,
         element: <Home />,
@@ -36,6 +28,10 @@ const router = createBrowserRouter([
       {
         path : "form",
         element : <Private><Form/></Private>
+      },
+      {
+        path : "*",
+        element : <PageNotFound/>
       }
     ],
   },
