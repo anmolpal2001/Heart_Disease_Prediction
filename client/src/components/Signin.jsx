@@ -23,7 +23,7 @@ const res=await fetch('http://localhost:4000/api/v1/auth/signin',{
 const response=await res.json()
 console.log(response)
 if(response.success){
-dispatch(loginSuccess(response.sendData))
+dispatch(loginSuccess(response))
 navigate('/form')
 }
 

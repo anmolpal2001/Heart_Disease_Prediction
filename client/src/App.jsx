@@ -6,6 +6,7 @@ import SignInPage from "./pages/SignInPage";
 import Root from "./pages/Root";
 import Form from "./pages/Form"
 import Private from "./pages/Private";
+import Results from "./pages/Results";
 
 
 const router = createBrowserRouter([
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
             path: "/form",
             element: <Form />,
           },
+          {
+            path:'/results',
+            element:<Results/>
+          }
         ],
       },
       {
