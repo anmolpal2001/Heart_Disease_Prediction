@@ -35,13 +35,13 @@ function Form() {
   };
 
   return (
-    <div className="bg-[#f7f7f7] max-w-full max-h-full rounded-lg ">
+    <div className="bg-[#f7f7f7] max-w-full max-h-full rounded-lg  overflow-hidden py-10 ">
       <div className="w-5/6 bg-white m-auto  md:w-3/4">
         <div className="bg-[#2a8683] p-4 text-center text-2xl font-bold text-white rounded-t-lg">
           Form Details
         </div>
 
-        <form className=" " onSubmit={submitHandler}>
+        <form className=" " onSubmit={submitHandler} className="my-5">
           <div className="flex-col justify-evenly items-start w-full px-4 md:flex md:flex-row md:px-0">
             <div className="m-3">
               <div className="my-3">
@@ -270,10 +270,10 @@ function Form() {
               </div>
             </div>
           </div>
-          <div className="flex w-full">
+          <div className="flex w-full item-center justify-center mb-4">
             <button
               type="submit"
-              className="py-2 px-4  bg-[#2A8683]  text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+              className="py-3 px-3 mt-5 bg-[#2A8683] lg:w-1/4 w-2/4 text-white  transition ease-in duration-200 text-center font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 text-xl rounded-lg "
             >
               Submit
             </button>
