@@ -30,11 +30,7 @@ const router = createBrowserRouter([
       {
         path : "form",
         element : <Private><Form/></Private>
-      },{
-        path:'forgot-password',
-        
       },
-   
       {
         path : "*",
         element : <PageNotFound/>
