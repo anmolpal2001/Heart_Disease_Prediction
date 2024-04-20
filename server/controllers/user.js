@@ -96,10 +96,7 @@ const forgetPassword = async (req, res) => {
       email,
     };
 
-    const changePasswordSecret =
-      process.env.CHANGE_PASSWORD_SECRET + validUser.password;
-
-    const token = jwt.sign(payload, changePasswordSecret, { expiresIn: "5m" });
+    const token = jwt.sign(payload, process.env.CHANGE_PASSWORD_SECRET, { expiresIn: "5m" });
 
     const linkForChangePassword = `${process.env.CLIENT_URL}/reset-password/${validUser._id}/${token}`;
     console.log(linkForChangePassword);
@@ -130,9 +127,7 @@ const changePassword = async (req, res) => {
         message: "User is not available",
       });
     }
-
-    const changePasswordSecret = process.env.CHANGE_PASSWORD_SECRET + validUser.password;
-    const payload = jwt.verify(token, changePasswordSecret);
+    const payload = jwt.verify(token, process.env.CHANGE_PASSWORD_SECRET);
 
     if (!payload) {
       return res.status(400).json({

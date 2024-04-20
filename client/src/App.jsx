@@ -8,6 +8,7 @@ import Form from "./pages/Form";
 import Private from "./pages/Private";
 import PageNotFound from "./pages/404";
 import ResetPassword from "./pages/ResetPassword";
+import ForgetPassword from "./pages/ForgetPassword";
 
 const router = createBrowserRouter([
   {
@@ -34,9 +35,14 @@ const router = createBrowserRouter([
       {
         path : "*",
         element : <PageNotFound/>
-      },{
+      },
+      {
         path:'/reset-password/:id/:token',
         element:<ResetPassword/>
+      },
+      {
+        path : "/forgot-password",
+        element : <ForgetPassword/>
       }
     ],
   },

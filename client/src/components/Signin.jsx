@@ -101,12 +101,12 @@ catch(err){
             </div>
             <div className="flex items-center mb-6 -mt-4">
               <div className="flex ml-auto">
-                <a
-                  href="#"
+                <Link
+                  to="/forgot-password"
                   className="inline-flex text-xs font-thin text-gray-500 sm:text-sm dark:text-gray-100 hover:text-gray-700 dark:hover:text-white"
                 >
                   Forgot Your Password?
-                </a>
+                </Link>
               </div>
             </div>
             <div className="flex w-full">
