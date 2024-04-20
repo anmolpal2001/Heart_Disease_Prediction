@@ -25,11 +25,11 @@ const heartSchema = mongoose.Schema({
         type : String,
         required : true
     },
-    thalach : {
+    restecg : {
         type : String,
         required : true
     },
-    restecg : {
+    thalach : {
         type : String,
         required : true
     },
@@ -54,7 +54,7 @@ const heartSchema = mongoose.Schema({
         required : true
     },
     target : {
-        type : Number,
+        type : String,
     }
 }, { timestamps : true });
 

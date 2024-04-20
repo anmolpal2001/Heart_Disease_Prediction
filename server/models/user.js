@@ -31,6 +31,12 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    previoudResults: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "heart",
+      },
+    ],
   },
   { timestamps: true }
 );

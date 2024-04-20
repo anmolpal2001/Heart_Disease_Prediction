@@ -60,7 +60,7 @@ const signin = async (req, res, next) => {
     res
       .cookie("token", token, { httpOnly: true, expires: expiryDate })
       .status(200)
-      .json({ success: true, sendData });
+      .json({ success: true, sendData,token });
   } catch (err) {
     next(err);
   }

@@ -4,10 +4,12 @@ dotenv.config();
 import userRoutes from "./routes/user.js";
 import heartRoutes from "./routes/heart.js"
 import connectDB from "./config/database.js";
+import cookieParser from "cookie-parser";
 import cors from 'cors'
 const app = express();
 app.use(cors())
 app.use(express.json());
+app.use(cookieParser());
 
 const PORT = process.env.PORT || 3000;
 

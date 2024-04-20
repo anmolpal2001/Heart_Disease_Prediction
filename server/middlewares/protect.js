@@ -2,9 +2,10 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 
-const protect = async (req, res) => {
+const protect = async (req, res,next) => {
   try {
-    const token = req.body.token || req.cookies.token || req.headers("Authorization").replace("Bearer ", "");
+    const token = req.body.token || req.cookies.token || req.headers["Authorization"].split(" ")[1];
+    console.log()
     if (!token || token == undefined || token == "") {
       return res.status(401).json({
         success: false,
