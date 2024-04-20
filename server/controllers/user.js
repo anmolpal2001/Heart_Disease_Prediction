@@ -20,10 +20,10 @@ const signup = async (req, res) => {
       password: hashedpassword,
       profilePic: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName}+${lastName}`,
     });
-    data.password=null
+    data.password = null;
     res.status(200).json({
       success: true,
-      data:data
+      data: data,
     });
   } catch (err) {
     // next(err);
@@ -44,7 +44,6 @@ const signin = async (req, res, next) => {
 
     if (!validUser) return next(errorHandler(404, "User Is Not Available"));
 
-
     const validPass = bcryptjs.compareSync(password, validUser.password);
     console.log(`email:${email} password:${password}`);
 
@@ -60,9 +59,26 @@ const signin = async (req, res, next) => {
     res
       .cookie("token", token, { httpOnly: true, expires: expiryDate })
       .status(200)
-      .json({ success: true, sendData,token });
+      .json({ success: true, sendData, token });
   } catch (err) {
     next(err);
   }
 };
-export { test, signup, signin };
+
+const logout = async (req, res) => {
+  try {
+    res.clearCookie("token");
+    return res.status(200).json({
+      success: true,
+      message: "Logout Successfully, Thanks for visiting...",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Logout failed, please try again",
+    });
+  }
+};
+
+export { test, signup, signin,logout };
