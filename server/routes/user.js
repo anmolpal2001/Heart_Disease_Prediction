@@ -7,7 +7,7 @@ router.get("/test", test);
 router.post("/signup", signup);
 router.post("/signin", signin);
 router.get("/logout",logout);
-router.post("/forget-password", forgetPassword);
+router.post("/forgot-password", forgetPassword);
 router.post("/change-password/:id/:token", changePassword);
 
 export default router;
