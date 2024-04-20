@@ -81,4 +81,89 @@ const logout = async (req, res) => {
   }
 };
 
-export { test, signup, signin,logout };
+const forgetPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const validUser = await User.findOne({ email });
+    if (!validUser) {
+      return res.status(404).json({
+        success: false,
+        message: "User is not available",
+      });
+    }
+    const payload = {
+      id: validUser._id,
+      email,
+    };
+
+    const changePasswordSecret =
+      process.env.CHANGE_PASSWORD_SECRET + validUser.password;
+
+    const token = jwt.sign(payload, changePasswordSecret, { expiresIn: "5m" });
+
+    const linkForChangePassword = `${process.env.CLIENT_URL}/reset-password/${validUser._id}/${token}`;
+    console.log(linkForChangePassword);
+
+    return res.status(200).json({
+      success: true,
+      message: "Link for change password has been sent to your email",
+      linkForChangePassword,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: "Error while sending link for change password, please try again",
+    });
+  }
+};
+
+const changePassword = async (req, res) => {
+  try {
+    const { id, token } = req.params;
+    const { newPassword, confirmNewPassword } = req.body;
+
+    const validUser = await User.findById(id);
+    if (!validUser) {
+      return res.status(404).json({
+        success: false,
+        message: "User is not available",
+      });
+    }
+
+    const changePasswordSecret =
+      process.env.CHANGE_PASSWORD_SECRET + validUser.password;
+    const payload = jwt.verify(token, changePasswordSecret);
+
+    if (!payload) {
+      return res.status(400).json({
+        success: false,
+        message: "Link is invalid or expired",
+      });
+    }
+
+    if (newPassword !== confirmNewPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "Password and Confirm Password does not match",
+      });
+    }
+
+    const hashedpassword = bcryptjs.hashSync(newPassword, 10);
+    validUser.password = hashedpassword;
+    await validUser.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Password has been changed successfully",
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: "Error while changing password, please try again",
+    });
+  }
+};
+
+export { test, signup, signin, logout, forgetPassword, changePassword}
