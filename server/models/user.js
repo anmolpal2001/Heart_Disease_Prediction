@@ -31,7 +31,7 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    previoudResults: [
+    previousResults: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "heart",
