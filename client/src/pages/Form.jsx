@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 function Form() {
   const [data, setData] = useState({});
-
+const currentUser=useSelector((state)=>state.auth.currentUser)
   const onChangeHandler = (e) => {
     setData((prev) => {
       return {
@@ -18,9 +19,10 @@ function Form() {
 
     try {
       console.log(data);
-      const res = await fetch("http://localhost:4000/api/v1/auth/", {
+      const res = await fetch("http://localhost:4000/api/v1/heart/predict", {
         headers: {
           "Content-Type": "application/json",
+          Authorization:`Bearer ${currentUser.token}`
         },
         method: "POST",
         body: JSON.stringify(data),

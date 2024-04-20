@@ -1,27 +1,8 @@
 import React from 'react'
-import { useState ,useEffect} from 'react';
-import {useSelector} from 'react-redux'
-function Result(props) {
-const childToggle=()=>{
-    const data=useSelector((state)=>state.auth.currentUser)
-    const [resultData,setResultData]=useState([])
-    useEffect(()=>{
-const getAllData=async()=>{
-const res=await fetch('http://localhost:4000/api/v1/heart/results',{
-    method:'GET',
-    headers:{
-        'Authorization':`Bearer ${currentUser.token}`
-    }
-})
-return await res.json()
-}
-getAllData().then((res)=>{
-    setResultData(res)
-}).catch((err)=>{
-    console.log(err)
-})
 
-    },[])
+function Result(props) {
+    
+const childToggle=()=>{
     props.toggleResult(props.index)
 }
 
