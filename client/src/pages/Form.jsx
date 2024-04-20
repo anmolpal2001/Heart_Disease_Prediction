@@ -69,14 +69,15 @@ function Form() {
             onChange={onChangeHandler}
             className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
           >
-            <option value="0">Male</option>
-            <option value="1">Female</option>
-            <option value="3">Female</option>
+            <option value="0">Typical angina</option>
+            <option value="1">Atypical angina</option>
+            <option value="3">Non-anginal pain</option>
+            <option value="3">Asymptomatic</option>
           </select>
         </div>
 
         <div>
-          <label className="block mb-2 font-bold text-gray-700">testbps</label>
+          <label className="block mb-2 font-bold text-gray-700">Resting Blood Pressure</label>
           <input
             id="testbps"
             className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
@@ -87,7 +88,7 @@ function Form() {
         </div>
         <div>
           <label className="block mb-2 font-bold text-gray-700">
-            Cholesterol
+            Cholesterol Level
           </label>
           <input
             id="Cholesterol"
@@ -99,7 +100,7 @@ function Form() {
         </div>
         <div>
           <label className="block mb-2 font-bold text-gray-700">
-            fasting blood sugar
+            Fasting Blood Sugar
           </label>
           <select
             id="fbs"
@@ -113,7 +114,7 @@ function Form() {
 
         <div>
           <label className="block mb-2 font-bold text-gray-700">
-            resting electrocardiographic result
+          Maximum Heart Rate
           </label>
           <select
             id="restecg"
@@ -127,7 +128,7 @@ function Form() {
         </div>
 
         <div>
-          <label className="block mb-2 font-bold text-gray-700">Thalach</label>
+          <label className="block mb-2 font-bold text-gray-700">Resting Electrocardiographic Results</label>
           <input
             id="thalach"
             className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
@@ -151,7 +152,7 @@ function Form() {
           </select>
         </div>
         <div>
-          <label className="block mb-2 font-bold text-gray-700">Oldpeak</label>
+          <label className="block mb-2 font-bold text-gray-700">ST Depression</label>
           <input
             id="oldpeak"
             className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
@@ -160,7 +161,7 @@ function Form() {
           />
         </div>
         <div>
-          <label className="block mb-2 font-bold text-gray-700">slope</label>
+          <label className="block mb-2 font-bold text-gray-700">ST Segment Slope</label>
           <select
             id="slope"
             onChange={onChangeHandler}
@@ -172,7 +173,7 @@ function Form() {
           </select>
         </div>
         <div>
-          <label className="block mb-2 font-bold text-gray-700">CA</label>
+          <label className="block mb-2 font-bold text-gray-700">Number of Major Vessels</label>
           <select
             id="ca"
             onChange={onChangeHandler}
@@ -203,7 +204,7 @@ function Form() {
                 type="submit"
                 className="py-2 px-4  bg-[#2A8683]  text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
               >
-                Submit
+                Get Your Report
               </button>
             </div>
       </form>
