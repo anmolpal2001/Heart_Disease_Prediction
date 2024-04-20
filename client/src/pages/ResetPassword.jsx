@@ -1,62 +1,64 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 function ResetPassword() {
-    const {id,token}=useParams()
-    console.log(id+" "+token)
-    const[error,setError]=useState({
-        hasError:false,
-        content:''
-    })
+  const { id, token } = useParams();
+  console.log(id + " " + token);
+  const [error, setError] = useState({
+    hasError: false,
+    content: "",
+  });
 
-    const [data,setData]=useState({
-        newPassword:'',
-        confirmNewPassword:''
-    })
- 
-  
-const onChangeHandler=(event)=>{
-    setError((prev)=>{return {...prev,hasError:false}})
-    setData((prev)=>{
-        return{...prev,[event.target.id]:event.target.value}
-    })
-}
-const submitHandler=async(event)=>{
-event.preventDefault()
-    try{
-const res=await fetch(`http://localhost:4000/api/v1/auth/change-password/${id}/${token}`,{
-    method:'POST',
-    headers:{
-        'Content-Type':'application/json',
-    },
-    body:data
-})
-const response=await data.json()
-if(!response.success){
-setError({
-   hasError:true,
-   content:response.message
-})
-}
-    }
-    catch(err){
-console.log(err)
+  const [data, setData] = useState({
+    newPassword: "",
+    confirmNewPassword: "",
+  });
 
+  const onChangeHandler = (event) => {
+    setError((prev) => {
+      return { ...prev, hasError: false };
+    });
+    setData((prev) => {
+      return { ...prev, [event.target.id]: event.target.value };
+    });
+  };
+  const submitHandler = async (event) => {
+    event.preventDefault();
+    try {
+      const res = await fetch(
+        `http://localhost:4000/api/v1/auth/change-password/${id}/${token}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      const response = await res.json();
+      if (!response.success) {
+        setError({
+          hasError: true,
+          content: response.message,
+        });
+      }
+    } catch (err) {
+      console.log(err);
     }
-console.log(data.newPassword)
-}
+    console.log(data.newPassword);
+  };
   return (
     <div className="flex justify-center items-center mt-20">
       <div className="flex flex-col w-full max-w-md px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
         <div className="self-center mb-6 text-xl font-light text-gray-600 sm:text-2xl dark:text-white">
-         Reset Password
+          Reset Password
         </div>
         <div className="mt-8">
           <form onSubmit={submitHandler}>
             <div className="flex flex-col mb-2">
               <div className="flex relative ">
                 <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
-                <svg
+                  <svg
                     width="15"
                     height="15"
                     fill="currentColor"
@@ -67,7 +69,7 @@ console.log(data.newPassword)
                   </svg>
                 </span>
                 <input
-                onChange={onChangeHandler}
+                  onChange={onChangeHandler}
                   type="password"
                   value={data.newPassword}
                   id="newPassword"
@@ -99,9 +101,7 @@ console.log(data.newPassword)
                 />
               </div>
             </div>
-            <div>
-                {error.hasError&&<p>{error.content}</p>}
-            </div>
+            <div>{error.hasError && <p>{error.content}</p>}</div>
             {/* <div className="flex items-center mb-6 -mt-4">
               <div className="flex ml-auto">
                 <a
@@ -117,7 +117,7 @@ console.log(data.newPassword)
                 type="submit"
                 className="py-2 px-4  bg-[#2A8683]  text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
               >
-               Submit
+                Submit
               </button>
             </div>
           </form>
@@ -133,7 +133,7 @@ console.log(data.newPassword)
         </div> */}
       </div>
     </div>
-  )
+  );
 }
 
-export default ResetPassword
+export default ResetPassword;

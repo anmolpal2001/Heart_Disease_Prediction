@@ -131,8 +131,7 @@ const changePassword = async (req, res) => {
       });
     }
 
-    const changePasswordSecret =
-      process.env.CHANGE_PASSWORD_SECRET + validUser.password;
+    const changePasswordSecret = process.env.CHANGE_PASSWORD_SECRET + validUser.password;
     const payload = jwt.verify(token, changePasswordSecret);
 
     if (!payload) {
