@@ -5,7 +5,7 @@ import { MdMarkEmailRead } from "react-icons/md";
 const ForgetPassword = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState(null);
+  const [success, setSuccess] = useState(false);
   const onChangeHandler = (e) => {
     setEmail(e.target.value);
   };
@@ -13,7 +13,7 @@ const ForgetPassword = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "http://localhost:4000/api/v1/auth/forget-password",
+        "http://localhost:4000/api/v1/auth/forgot-password",
         {
           method: "POST",
           headers: {
@@ -25,6 +25,7 @@ const ForgetPassword = () => {
       const data = await response.json();
       if (data.success) {
         setSuccess(true);
+        console.log(data.linkForChangePassword);
       } else {
         setError(data.message);
       }
@@ -35,26 +36,26 @@ const ForgetPassword = () => {
 
   return (
     <>
-      {success === true ? (
-        <div className="flex justify-center items-center mt-20">
-          <div className="flex flex-col w-full max-w-lg px-6 py-8 bg-white rounded-lg shadow dark:bg-gray-800 md:px-8 lg:px-10">
-            <div className="self-center mb-6 text-xl font-light text-gray-800 sm:text-2xl">
+      {!success ? (
+        <div className="flex justify-center items-center mt-16">
+          <div className="flex flex-col w-full max-w-lg px-6 py-8 bg-white rounded-lg md:px-8 lg:px-10">
+            <div className="self-center font-bold mb-2 text-xl text-[#2A8683] sm:text-2xl">
               Forgot Password
             </div>
             <div className="mt-8 flex flex-col">
-              <p className="mb-4 text-md leading-none tracking-tight text-[#2A8683]">
+              <p className="mb-4 text-md leading-none tracking-tight text-gray-600">
                 Enter your email address below and we'll send you a link to
                 reset your password.
               </p>
-              <form onSubmit={submitHandler} className="w-full">
-                <div className="flex flex-col mb-2">
-                  <div className="my-3">
+              <form className="w-full">
+                <div className="flex flex-col mt-8">
+                  <div className="mb-10">
                     <label className="block mb-1 font-bold text-gray-700 ">
                       EMAIL ADDRESS
                     </label>
                     <input
                       id="email"
-                      className="rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base"
+                      className="rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base"
                       placeholder="Enter your email here"
                       type="email"
                       onChange={onChangeHandler}
@@ -63,7 +64,8 @@ const ForgetPassword = () => {
                 </div>
                 <div className="flex w-full">
                   <button
-                    type="submit"
+                    type="button"
+                    onClick={submitHandler}
                     className={`py-2 px-4 bg-[#2A8683] text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md  rounded-lg ${
                       !email && "cursor-not-allowed bg-gray-400"
                     }`}
@@ -87,34 +89,32 @@ const ForgetPassword = () => {
           </div>
         </div>
       ) : (
-        <div className="content pt-4">
-          <div className="verify-email flex flex-col items-center justify-center sm:h-screen text-gray-600 m-auto px-2">
-            <h1 className="text-3xl font-bold mb-4 text-center text-black">
-              Please verify your email...
+        <div className="flex justify-center items-center mt-16 mx-auto">
+          <div className="flex flex-col justify-center items-center w-full max-w-lg px-6 py-8 bg-white rounded-lg md:px-8 lg:px-10">
+            <h1 className="text-3xl font-bold mb-4 text-center text-[#2A8683]">
+              Email Sent Successfully
             </h1>
-            <div className="email-icon mb-4">
-              <MdMarkEmailRead />
+            <div className=" mb-4">
+              <MdMarkEmailRead size={60} color="#2A8683"/>
             </div>
             <p className="mb-2 text-center">
-              Please verify your email address. We've sent a confirmation email
+              An email with instructions to reset your password has been sent
               to:
             </p>
-            <p className="mb-4 text-center font-bold text-black">
-              account@refero.design
-            </p>
+            <p className="mb-4 text-center font-bold text-blue-700">{email}</p>
             <p className="mb-4 text-center">
-              Click the confirmation link in that email to begin using Dribbble.
+              Click the link in that email to reset your password.
             </p>
             <p className="mb-2 text-center">
               Didn't receive the email? Check your Spam folder, it may have been
               caught by a filter. If you still don't see it, you can{" "}
-              <a href="#" className="text-pink-500 hover:underline">
-                resend the confirmation email.
+              <a href="#" className="text-[#2A8683] hover:underline">
+                resend the reset password email.
               </a>
             </p>
             <p className="mb-4 text-center">
               Wrong email address?{" "}
-              <a href="#" className="text-pink-500 hover:underline">
+              <a href="#" className="text-[#2A8683] hover:underline">
                 Change it.
               </a>
             </p>
