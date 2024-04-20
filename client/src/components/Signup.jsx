@@ -28,7 +28,7 @@ try{
 const response=await res.json()
 if(response.success){
   // dispatch(loginSuccess(response.data))
-  navigate('/')
+  navigate('/sign-in')
 }
 
 setData(()=>{

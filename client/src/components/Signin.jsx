@@ -24,7 +24,7 @@ const response=await res.json()
 console.log(response)
 if(response.success){
 dispatch(loginSuccess(response.sendData))
-navigate('/')
+navigate('/form')
 }
 
   setData(()=> {return {

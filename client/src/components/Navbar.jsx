@@ -23,7 +23,7 @@ dispatch(logout())
                             className="w-full h-12"
                             alt="Logo"
                         />
-                        <h1 className="text-2xl font-bold text-gray-800">HelthCare</h1>
+                        <h1 className="text-2xl font-bold text-gray-800">HealthCare</h1>
                     </Link>
                     {(location.pathname === "/"||location.pathname==='/sign-up') && <div className="flex items-center lg:order-2">
                       { isAuth?(<Link

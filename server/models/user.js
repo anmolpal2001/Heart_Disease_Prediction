@@ -22,11 +22,9 @@ const userSchema = mongoose.Schema(
     additional_info: {
       gender : {
         type : String,
-        required : true
       },
       age : {
         type : String,
-        required : true
       },
     },
     profilePic: {
