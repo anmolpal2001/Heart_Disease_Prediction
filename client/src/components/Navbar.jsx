@@ -53,7 +53,7 @@ const Navbar = () => {
                 >
                   <button className="w-10 h-10">
                     <img
-                      src={currentUser.profilePic}
+                      src={currentUser.sendData.profilePic}
                       alt=""
                       className="w-full h-full object-cover rounded-full"
                     />
