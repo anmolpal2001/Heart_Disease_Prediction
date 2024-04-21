@@ -11,14 +11,19 @@ const test = (req, res) => {
 const signup = async (req, res) => {
   try {
     const { firstName, lastName, email, password } = req.body;
+
+    if ((!firstName, !lastName, !email, !password)) {
+      return next(errorHandler(404, " All Detail Required"));
+    }
+
     const hashedpassword = bcryptjs.hashSync(password, 10);
     // console.log(firstName, email, password, lastName);
-if(!firstName||!lastName||!email||!password){
-  return res.status(400).json({
-    success:false,
-    message:'Please fill all the details'
-  })
-}
+    if (!firstName || !lastName || !email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Please fill all the details",
+      });
+    }
     const data = await User.create({
       firstName,
       lastName,
@@ -30,7 +35,7 @@ if(!firstName||!lastName||!email||!password){
     res.status(200).json({
       success: true,
       data: data,
-      message:'Account created successfully'
+      message: "Account created successfully",
     });
   } catch (err) {
     // next(err);
@@ -46,10 +51,9 @@ if(!firstName||!lastName||!email||!password){
 
 const signin = async (req, res, next) => {
   try {
-
     const { email, password } = req.body;
-    if(!email||!password){
-      return next(errorHandler(400,'Please fill all the details'))
+    if (!email || !password) {
+      return next(errorHandler(400, "Please fill all the details"));
     }
     const validUser = await User.findOne({ email });
 
@@ -58,8 +62,7 @@ const signin = async (req, res, next) => {
     const validPass = bcryptjs.compareSync(password, validUser.password);
     // console.log(`email:${email} password:${password}`);
 
-    if (!validPass)
-      return next(errorHandler(404, "Wrong Password"));
+    if (!validPass) return next(errorHandler(404, "Wrong Password"));
 
     const { password: userPass, ...sendData } = validUser._doc;
 
@@ -70,7 +73,7 @@ const signin = async (req, res, next) => {
     res
       .cookie("token", token, { httpOnly: true, expires: expiryDate })
       .status(200)
-      .json({ success: true, sendData, token ,message:'Sign-in Successfull'});
+      .json({ success: true, sendData, token, message: "Sign-in Successfull" });
   } catch (err) {
     next(err);
   }
@@ -107,11 +110,13 @@ const forgetPassword = async (req, res) => {
       email,
     };
 
-    const token = jwt.sign(payload, process.env.CHANGE_PASSWORD_SECRET, { expiresIn: "5m" });
+    const token = jwt.sign(payload, process.env.CHANGE_PASSWORD_SECRET, {
+      expiresIn: "5m",
+    });
 
     const linkForChangePassword = `${process.env.CLIENT_URL}/reset-password/${validUser._id}/${token}`;
     console.log(linkForChangePassword);
-    await sendMail(email,'Reset Password',linkForChangePassword)
+    await sendMail(email, "Reset Password", linkForChangePassword);
     return res.status(200).json({
       success: true,
       message: "Link for change password has been sent to your email",
@@ -171,4 +176,4 @@ const changePassword = async (req, res) => {
   }
 };
 
-export { test, signup, signin, logout, forgetPassword, changePassword}
+export { test, signup, signin, logout, forgetPassword, changePassword };

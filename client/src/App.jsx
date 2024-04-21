@@ -11,7 +11,8 @@ import ResetPassword from "./pages/ResetPassword";
 import ForgetPassword from "./pages/ForgetPassword";
 import Results from "./pages/Results";
 import Authenticated from "./components/Authenticated";
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
+import Profile from "./pages/Profile";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,44 +24,59 @@ const router = createBrowserRouter([
       },
       {
         path: "sign-up",
-        element: <Authenticated><SignUpPage /></Authenticated>,
+        element: (
+          <Authenticated>
+            <SignUpPage />
+          </Authenticated>
+        ),
       },
       {
         path: "sign-in",
-        element: <Authenticated><SignInPage /></Authenticated>,
+        element: (
+          <Authenticated>
+            <SignInPage />
+          </Authenticated>
+        ),
       },
       {
-        path : "form",
-        element : <Private><Form/></Private>
+        path: "form",
+        element: (
+          <Private>
+            <Form />
+          </Private>
+        ),
       },
       {
-        path : "*",
-        element : <PageNotFound/>
+        path: "/profile",
+        element: <Profile />,
       },
       {
-        path:'/reset-password/:id/:token',
-        element:<ResetPassword/>
+        path: "*",
+        element: <PageNotFound />,
       },
       {
-        path : "/forgot-password",
-        element : <ForgetPassword/>
-      },{
-        path:'/reports',
-        element:<Results/>
-      }
+        path: "/reset-password/:id/:token",
+        element: <ResetPassword />,
+      },
+      {
+        path: "/forgot-password",
+        element: <ForgetPassword />,
+      },
+      {
+        path: "/reports",
+        element: <Results />,
+      },
     ],
   },
 ]);
 
 function App() {
   return (
-<>
-      <RouterProvider router={router}/>
-  <Toaster/>
-      </> 
-    
-    
-  )
+    <>
+      <RouterProvider router={router} />
+      <Toaster />
+    </>
+  );
 }
 
 export default App;
