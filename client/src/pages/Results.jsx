@@ -1,7 +1,8 @@
 import React from "react";
-import Result from "../components/Result";
+
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import AccordionComponent from "../components/AccordionComponent";
 const DUMMy = [
   {
     date: "10 may",
@@ -39,37 +40,38 @@ function Results() {
   }, []);
   const [openIndex, setOpenIndex] = useState(-1);
   const toggle = (index) => {
-    // console.log('index ',index)
-    // console.log('openINdex',openIndex)
+
     if (index === openIndex) {
       setOpenIndex(-1);
     } else {
       setOpenIndex(index);
     }
-    // console.log('after openINdex',openIndex)
+ 
   };
 
   return (
     <>
       <div className="bg-[#F7F7F7] border-gray-200 px-4 lg:px-6 py-2.5">
         <div className="mx-auto max-w-screen-2xl flex flex-col justify-center items-center">
-          <div className="px-4 lg:px-14 max-w-screen-2xl w-full mx-auto h-screen">
-              <div className="my-10 flex flex-col items-center justify-between gap-12">
-                {DUMMy.map((data, index) => (
-                  <div className="w-1/2 flex justify-center items-center bg-green-300" key={index}>
-                    <Result
-                      toggleResult={toggle}
-                      index={index}
-                      show={index === openIndex}
-                      date={data.data}
-                      reportId={data.reportId}
-                    />
-                  </div>
-                ))}
-              </div>
+          <div className="px-4 lg:px-14 max-w-screen-2xl w-full mx-auto h-screen"> 
+             
+     
+              {DUMMy.map((data,index)=><div
+
+                  key={index}
+                ><AccordionComponent
+              toggleResult={toggle}
+              index={index}
+              show={index === openIndex}
+              date={data.date}
+              reportId={data.reportId}
+              /></div>)}
+              
+                  
             </div>
           </div>
-      </div>
+        </div> 
+      
     </>
   );
 }
