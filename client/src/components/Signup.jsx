@@ -54,11 +54,11 @@ setData((prev)=>{
   }
   return (
     <div>
-      <div className="flex justify-center items-center mt-20">
+      <div className="flex justify-center items-center mt-18">
         <div className="flex flex-col w-full max-w-md px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
-          {/* <div className="self-center mb-6 text-xl font-light text-gray-600 sm:text-2xl dark:text-white">
+           <div className="self-center mb-6 text-xl font-bold text-gray-600 sm:text-2xl dark:text-white">
             Create your new account
-          </div> */}
+          </div> 
           <div className="mt-8">
             <form onSubmit={submitFormHandler}>
             <div className="flex flex-col mb-2">
@@ -79,7 +79,7 @@ setData((prev)=>{
                   onChange={changeHandler}
                     type="text"
                     id="firstName"
-                    className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                     placeholder="Your FirstName"
                     value={data.firstName}
                   />
@@ -103,7 +103,7 @@ setData((prev)=>{
                    onChange={changeHandler}
                     type="text"
                     id="lastName"
-                    className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                     placeholder="Your LastName"
                     value={data.lastName}
                   />
@@ -127,7 +127,7 @@ setData((prev)=>{
                    onChange={changeHandler}
                     type="text"
                     id="email"
-                    className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                     placeholder="Your email"
                     value={data.email}
                   />
@@ -150,7 +150,7 @@ setData((prev)=>{
                   onChange={changeHandler}
                     type="password"
                     id="password"
-                    className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                     placeholder="Your password"
                     value={data.password}
                   />
@@ -160,7 +160,7 @@ setData((prev)=>{
                 <button
                
                   type="submit"
-                  className="py-2 px-4  bg-[#2A8683]  text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+                  className="py-2 px-4  bg-[#2A8683]  hover:bg-[#2a8683ee]  text-white w-full transition ease-in duration-200 text-center text-base font-bold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
                 >
                   Sign Up
                 </button>
