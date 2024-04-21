@@ -5,6 +5,7 @@ function Profile() {
   const [formDisable, setFormDisable] = useState(true);
   const [formData, setFormData] = useState(true);
 const user=useSelector((state)=>state.auth.currentUser.sendData)
+const token=useSelector((state)=>state.auth.currentUser.token)
   const formEditHandler = (e) => {
     setFormDisable((prev) => !prev);
   };
@@ -23,7 +24,7 @@ const user=useSelector((state)=>state.auth.currentUser.sendData)
       const res = await fetch("http://localhost:4000/api/v1/auth/profile", {
         headers: {
           "Content-Type": "application/json",
-          // Authorization: `Bearer ${currentUser.token}`,
+          Authorization: `Bearer ${token}`,
         },
         method: "POST",
         body: JSON.stringify(formData),
@@ -38,7 +39,7 @@ const user=useSelector((state)=>state.auth.currentUser.sendData)
     <section className="pt-2 bg-blueGray-50">
       <div className="w-full lg:w-4/12 px-4 mx-auto">
         <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-8">
-          <div className="px-6 bg-gradient-to-t from-[#f7cb6a] via-[#fabb75] to-[#fcab7e]">
+          <div className="px-6 bg-gradient-to-t from-yellow-300 via-yellow-400 to-yellow-500">
             <div className="text-center mt-8">
               <div className="flex justify-center items-center">
               <img className=" rounded-full h-32 w-32"src='https://images.pexels.com/photos/10139619/pexels-photo-10139619.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'></img>

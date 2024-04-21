@@ -176,4 +176,30 @@ const changePassword = async (req, res) => {
   }
 };
 
-export { test, signup, signin, logout, forgetPassword, changePassword };
+
+const updatePassword=async(req,res)=>{
+  try{
+    const newPassword=req.body.password
+  
+    if(newPassword.length===0||!newPassword){
+      return res.status(400).json({
+        message:'Password is undefined',
+        success:false
+
+      })
+    }
+    const hashedPassword=bcryptjs.hash(newPassword,10)
+const user=await User.findByIdAndUpdate(req.user.id,{
+  password:hashedPassword
+},{new:true})
+
+return res.status(200).json({
+  message:'Password updated successfully',
+  success:true,
+})
+  }
+  catch(err){
+
+  }
+}
+export { test, signup, signin, logout, forgetPassword, changePassword,updatePassword};
