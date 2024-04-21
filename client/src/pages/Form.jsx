@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
-// import { Link } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function Form() {
   const dummy = {
     age: "",
     gender: "",
     chestpain: "",
-    testbps: "",
+    trestbps: "",
     Cholesterol: "",
     fbs: "",
     restecg: "",
@@ -22,7 +22,7 @@ function Form() {
   // const [success, setSuccess] = useState(false);
   // const [output, setOutput] = useState([]);
   const [data, setData] = useState(dummy);
-  // const [remaining, setRemaining] = useState("");
+  const [loading, setLoading] = useState(false);
   const currentUser = useSelector((state) => state.auth.currentUser);
   const onChangeHandler = (e) => {
     setData((prev) => {
@@ -37,40 +37,17 @@ function Form() {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      // if (
-      //   !data.age ||
-      //   !data.sex ||
-      //   !data.cp ||
-      //   !data.testbps ||
-      //   !data.Cholesterol ||
-      //   !data.fbs ||
-      //   !data.restecg ||
-      //   !data.thalach ||
-      //   !data.exang ||
-      //   !data.oldpeak ||
-      //   !data.slope ||
-      //   !data.ca ||
-      //   !data.thal
-      // ) {
-      //   return;
-      // }
-
       for (let key in data) {
-        // console.log("hello", data[key]);
         if (!data[key]) {
-          // console.log("nooo", key);
           toast.error(`Please enter the ${key}`)
-          // setRemaining(`Missing field: ${key}`);
           return;
         }
       }
-      // setRemaining("");
-
       const formData = {
         age: Number(data.age),
         sex: Number(data.gender),
         cp: Number(data.chestpain),
-        trestbps: Number(data.testbps),
+        trestbps: Number(data.trestbps),
         chol: Number(data.Cholesterol),
         fbs: Number(data.fbs),
         restecg: Number(data.restecg),
@@ -82,6 +59,7 @@ function Form() {
         thal: Number(data.thal),
       };
       console.log(formData);
+      setLoading(true);
       const res = await fetch("http://localhost:4000/api/v1/heart/predict", {
         headers: {
           "Content-Type": "application/json",
@@ -91,17 +69,19 @@ function Form() {
         body: JSON.stringify(formData),
       });
       const pythonResponse = await res.json();
-      // console.log(pythonResponse);
       if (pythonResponse.success) {
+        setLoading(false);
         toast.success('Form submitted successfully')
         console.log(pythonResponse);
         // setOutput(pythonResponse.prediction);
       }
       else{
         toast.error('Internal Server Error')
+        setLoading(false);
       }
     } catch (err) {
       toast.error(err)
+      setLoading(false);
       console.log(err);
     }
   };
@@ -172,14 +152,14 @@ function Form() {
 
               <div className="my-3">
                 <label className="block mb-1 font-bold text-gray-700">
-                  TestBPS
+                  Resting Blood Pressure
                   <span className="text-sm text-gray-500">
                     {" "}
                     (90 - 180 mmHg)
                   </span>
                 </label>
                 <input
-                  id="testbps"
+                  id="trestbps"
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                   placeholder="The persons resting blood pressure"
                   onChange={onChangeHandler}
@@ -343,19 +323,12 @@ function Form() {
               </div>
             </div>
           </div>
-          {/* <div>
-            {remaining && (
-              <p className="text-red-500 text-center m-1 font-bold">
-                {remaining.toUpperCase()}
-              </p>
-            )}
-          </div> */}
           <div className="justify-center flex w-full">
             <button
               type="submit"
               className="w-1/3 py-2 bg-[#2A8683] text-lg  text-white  transition ease-in duration-200 text-center font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg md:w-1/4"
             >
-              Submit
+              {loading ? <CircularProgress size={30} style={{color:"white"}} /> : "Submit"}
             </button>
           </div>
         </form>

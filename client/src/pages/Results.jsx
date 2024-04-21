@@ -27,7 +27,7 @@ const DUMMy = [
 function Results() {
   const currentUser = useSelector((state) => state.auth.currentUser);
   const [resultData, setResultData] = useState([]);
-  let temp
+  let temp =[]
   useEffect(() => {
     const getAllData = async () => {
       const res = await fetch("http://localhost:4000/api/v1/heart/results", {
@@ -55,7 +55,7 @@ function Results() {
 if(item.cp==='3'){ cp='Typical angina'  }
 
         const trestbps=item.trestbps
-        const chol=item.chol
+        const chol=item.cholesterol
         const fbs=item.fbs==='0'?'False':'True'
        
         const thalach=item.thalach
@@ -73,11 +73,11 @@ if(item.cp==='3'){ cp='Typical angina'  }
 
         const ca=item.ca
         let  thal
-        if(item.thal==='0'){thal='Normal'}
-        if(item.thal==='1'){thal='Fixed defect'}
-        if(item.thal==='2'){thal='Reversible defect'}
+        if(item.thal==='1'){thal='Normal'}
+        if(item.thal==='2'){thal='Fixed defect'}
+        if(item.thal==='3'){thal='Reversible defect'}
         let val={
-          target,restecg,cp,age,chol,trestbps,fbs,thalach,exang,oldpeak,slope,ca,thal
+          sex,target,restecg,cp,age,chol,trestbps,fbs,thalach,exang,oldpeak,slope,ca,thal
             }
        temp.push({date,
   reportId,

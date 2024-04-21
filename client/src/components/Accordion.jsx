@@ -56,7 +56,7 @@ function Accordion(props) {
                 <td className="border px-8 py-2">{props.data.cp}</td>
               </tr>
               <tr className="hover:bg-gray-50">
-                <td className="border px-8 py-2">TestBPS (90-180mmHg)</td>
+                <td className="border px-8 py-2">TrestBPS (90-180mmHg)</td>
                 <td className="border px-8 py-2">{props.data.trestbps}</td>
               </tr>
               <tr className="hover:bg-gray-50">
@@ -64,7 +64,7 @@ function Accordion(props) {
                 <td className="border px-8 py-2">{props.data.chol}</td>
               </tr>
               <tr className="hover:bg-gray-50">
-                <td className="border px-8 py-2">Fasting Bloog Sugar</td>
+                <td className="border px-8 py-2">Fasting Blood Sugar</td>
                 <td className="border px-8 py-2">{props.data.fbs}</td>
               </tr>
               <tr className="hover:bg-gray-50">
@@ -89,11 +89,11 @@ function Accordion(props) {
               </tr>
               <tr className="hover:bg-gray-50">
                 <td className="border px-8 py-2">CA (Number of Major Vessels)</td>
-                <td className="border px-8 py-2">{props.data.slope}</td>
+                <td className="border px-8 py-2">{props.data.ca}</td>
               </tr>
               <tr className="hover:bg-gray-50">
                 <td className="border px-8 py-2">Thalassemia</td>
-                <td className="border px-8 py-2">{props.data.ca}</td>
+                <td className="border px-8 py-2">{props.data.thal}</td>
               </tr>
           <tr className="bg-gray-300">
             <td className="border px-8 py-2">Result</td>
