@@ -42,6 +42,7 @@ function Form() {
         body: JSON.stringify(formData),
       });
       const pythonResponse = await res.json();
+      console.log(pythonResponse)
       if(pythonResponse.success){
         console.log(pythonResponse);
       }

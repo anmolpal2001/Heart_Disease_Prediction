@@ -10,7 +10,14 @@ function Accordion(props) {
     }
  
     return ( 
+        
           <div className="w-full ">
+            <div className="justify-center flex w-full items-center">
+                    <PDFDownloadLink document={getDocumentHandler()} fileName='random.pdf'>
+                    {({ blob, url, loading, error }) =>
+        loading ?   'Loading': 'Download'
+      }
+        </PDFDownloadLink></div>
         <div className="border rounded-md mb-1 "> 
             <button 
                 className="w-full p-4 text-left bg-gray-200  
@@ -31,12 +38,12 @@ function Accordion(props) {
                         <li>Age : 22</li>
                         <li>Male:Male</li>
                     </ul>
-                    <div className="justify-center flex w-full items-center">
+                    {/* <div className="justify-center flex w-full items-center">
                     <PDFDownloadLink document={getDocumentHandler()} fileName='random.pdf'>
                     {({ blob, url, loading, error }) =>
         loading ?   'Loading': 'Download'
       }
-        </PDFDownloadLink> 
+        </PDFDownloadLink>  */}
 
 
 
@@ -48,7 +55,7 @@ function Accordion(props) {
       </button> */}
                   
   
-          </div>
+          {/* </div> */}
                 </div> 
             )} 
          
