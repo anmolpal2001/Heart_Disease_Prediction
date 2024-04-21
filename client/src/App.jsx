@@ -11,7 +11,8 @@ import ResetPassword from "./pages/ResetPassword";
 import ForgetPassword from "./pages/ForgetPassword";
 import Results from "./pages/Results";
 import Authenticated from "./components/Authenticated";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
+import Profile from "./pages/Profile";
 const router = createBrowserRouter([
   {
     path: "/",
