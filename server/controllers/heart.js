@@ -189,22 +189,4 @@ const getResults = async (req, res) => {
   }
 };
 
-const getResults = async (req, res) => {
-  try {
-    const userId = req.user.id;
-    const results = await User.findById(userId)
-      .populate("previousResults")
-      .exec();
-    const resultData = results.previousResults;
-    return res.status(200).json({
-      success: true,
-      previousResults: resultData,
-      message: "Results fetched successfully",
-    });
-  } catch (error) {
-    console.error("Error:", errorMessage);
-    res.status(500).send({ error: "Internal server error" });
-  }
-};
-
 export { predict, getResults };
