@@ -1,8 +1,28 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function Form() {
-  const [data, setData] = useState({});
+  const dummy = {
+    age: "",
+    gender: "",
+    chestpain: "",
+    testbps: "",
+    Cholesterol: "",
+    fbs: "",
+    restecg: "",
+    thalach: "",
+    exang: "",
+    oldpeak: "",
+    slope: "",
+    ca: "",
+    thal: "",
+  };
+  const [success, setSuccess] = useState(false);
+  const [output, setOutput] = useState([]);
+  const [data, setData] = useState(dummy);
+  const [remaining, setRemaining] = useState("");
   const currentUser = useSelector((state) => state.auth.currentUser);
   const onChangeHandler = (e) => {
     setData((prev) => {
@@ -17,10 +37,39 @@ function Form() {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
+      // if (
+      //   !data.age ||
+      //   !data.sex ||
+      //   !data.cp ||
+      //   !data.testbps ||
+      //   !data.Cholesterol ||
+      //   !data.fbs ||
+      //   !data.restecg ||
+      //   !data.thalach ||
+      //   !data.exang ||
+      //   !data.oldpeak ||
+      //   !data.slope ||
+      //   !data.ca ||
+      //   !data.thal
+      // ) {
+      //   return;
+      // }
+
+      for (let key in data) {
+        console.log("hello", data[key]);
+        if (!data[key]) {
+          // console.log("nooo", key);
+          toast.error(`Please enter the ${key}`)
+          setRemaining(`Missing field: ${key}`);
+          return;
+        }
+      }
+      setRemaining("");
+
       const formData = {
         age: Number(data.age),
-        sex: Number(data.sex),
-        cp: Number(data.cp),
+        sex: Number(data.gender),
+        cp: Number(data.chestpain),
         trestbps: Number(data.testbps),
         chol: Number(data.Cholesterol),
         fbs: Number(data.fbs),
@@ -42,17 +91,24 @@ function Form() {
         body: JSON.stringify(formData),
       });
       const pythonResponse = await res.json();
-      if(pythonResponse.success){
+      // console.log(pythonResponse);
+      if (pythonResponse.success) {
+        toast.success('Form submitted successfully')
         console.log(pythonResponse);
+        setOutput(pythonResponse.prediction);
+      }
+      else{
+        toast.error('Internal Server Error')
       }
     } catch (err) {
+      toast.error(err)
       console.log(err);
     }
   };
 
   return (
-    <div className="bg-[#f7f7f7] max-w-full max-h-full rounded-lg ">
-      <div className="w-5/6 bg-white m-auto  md:w-3/4">
+    <div className="bg-[#f7f7f7] max-w-full max-h-full rounded-lg flex">
+      <div className="w-5/6 bg-white m-auto  md:w-3/4 my-5">
         <div className="bg-[#2a8683] p-4 text-center text-2xl font-bold text-white rounded-t-lg">
           Form Details
         </div>
@@ -66,7 +122,7 @@ function Form() {
                 </label>
                 <input
                   id="age"
-                  className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                   placeholder="Your Age"
                   type="number"
                   min="0"
@@ -78,13 +134,15 @@ function Form() {
                   Gender
                 </label>
                 <select
-                  id="sex"
+              
+                  id="gender"
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled selected>
+                  {/* <option value="" disabled selected className="text-gray-700">
                     Select Gender
-                  </option>
+                  </option> */}
+                  <option value="none" className="text-gray-700" defaultValue>Select Gender</option>
                   <option value="1">Male</option>
                   <option value="0">Female</option>
                 </select>
@@ -98,11 +156,11 @@ function Form() {
                   Chest Pain
                 </label>
                 <select
-                  id="cp"
+                  id="chestpain"
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled selected>
+                  <option value="none" className="text-gray-700" defaultValue>
                     Select Chest Pain
                   </option>
                   <option value="0">Typical angina</option>
@@ -122,7 +180,7 @@ function Form() {
                 </label>
                 <input
                   id="testbps"
-                  className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                   placeholder="The persons resting blood pressure"
                   onChange={onChangeHandler}
                 />
@@ -138,7 +196,7 @@ function Form() {
 
                 <input
                   id="Cholesterol"
-                  className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                   placeholder="The persons resting blood pressure"
                   onChange={onChangeHandler}
                 />
@@ -152,7 +210,7 @@ function Form() {
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled selected>
+                  <option value="none" className="text-gray-700" defaultValue>
                     Select FBS
                   </option>
                   <option value="0">False</option>
@@ -169,7 +227,7 @@ function Form() {
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled selected>
+                  <option value="none" className="text-gray-700" defaultValue>
                     Select RES
                   </option>
                   <option value="0">Normal</option>
@@ -189,7 +247,7 @@ function Form() {
                 </label>
                 <input
                   id="thalach"
-                  className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                   placeholder="The persons maximum heart rate achieved"
                   onChange={onChangeHandler}
                 />
@@ -204,7 +262,7 @@ function Form() {
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled selected>
+                  <option value="none" className="text-gray-700" defaultValue>
                     Select Electrocardiographic
                   </option>
                   <option value="0">Absence of Exercise-Induced Angina</option>
@@ -221,7 +279,7 @@ function Form() {
                 </label>
                 <input
                   id="oldpeak"
-                  className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                   placeholder="ST depression caused by activity in comparison to rest"
                   onChange={onChangeHandler}
                 />
@@ -235,7 +293,7 @@ function Form() {
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled selected>
+                  <option value="none" className="text-gray-700" defaultValue>
                     Select Slope
                   </option>
                   <option value="0">upsloping</option>
@@ -257,7 +315,7 @@ function Form() {
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled selected>
+                  <option value="none" className="text-gray-700" defaultValue>
                     Select CA
                   </option>
                   <option value="0">0</option>
@@ -275,7 +333,7 @@ function Form() {
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled selected>
+                  <option value="none" className="text-gray-700" defaultValue>
                     Select Thalassemia
                   </option>
                   <option value="1">Normal</option>
@@ -285,10 +343,17 @@ function Form() {
               </div>
             </div>
           </div>
+          {/* <div>
+            {remaining && (
+              <p className="text-red-500 text-center m-1 font-bold">
+                {remaining.toUpperCase()}
+              </p>
+            )}
+          </div> */}
           <div className="justify-center flex w-full">
             <button
               type="submit"
-              className="py-2 px-4  bg-[#2A8683] text-lg  text-white  transition ease-in duration-200 text-center font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg w-1/4"
+              className="w-1/3 py-2 bg-[#2A8683] text-lg  text-white  transition ease-in duration-200 text-center font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg md:w-1/4"
             >
               Submit
             </button>

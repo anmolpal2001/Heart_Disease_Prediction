@@ -8,7 +8,8 @@ import { BiSolidUser } from "react-icons/bi";
 //   loginSuccess,
 // } from "../redux/auth/authSlice";
 import { useNavigate } from "react-router-dom";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 const Signup = () => {
   // const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,10 +32,12 @@ const Signup = () => {
       });
       const response = await res.json();
       if (response.success) {
+        toast.success(response.message);
         // dispatch(loginSuccess(response.data))
         navigate("/sign-in");
+      } else {
+        toast.error(response.message);
       }
-
       setData(() => {
         return {
           firstName: "",
@@ -59,9 +62,9 @@ const Signup = () => {
     <div>
       <div className="flex justify-center items-center mt-18">
         <div className="flex flex-col w-full max-w-md px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
-           <div className="self-center mb-6 text-xl font-bold text-gray-600 sm:text-2xl dark:text-white">
+          <div className="self-center mb-6 text-xl font-bold text-gray-600 sm:text-2xl dark:text-white">
             Create your new account
-          </div> 
+          </div>
           <div className="mt-8">
             <form onSubmit={submitFormHandler}>
               <div className="flex flex-col mb-2">

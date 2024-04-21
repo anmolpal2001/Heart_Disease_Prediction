@@ -10,7 +10,8 @@ import PageNotFound from "./pages/404";
 import ResetPassword from "./pages/ResetPassword";
 import ForgetPassword from "./pages/ForgetPassword";
 import Results from "./pages/Results";
-
+import Authenticated from "./components/Authenticated";
+import toast, { Toaster } from 'react-hot-toast';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,11 +23,11 @@ const router = createBrowserRouter([
       },
       {
         path: "sign-up",
-        element: <SignUpPage />,
+        element: <Authenticated><SignUpPage /></Authenticated>,
       },
       {
         path: "sign-in",
-        element: <SignInPage />,
+        element: <Authenticated><SignInPage /></Authenticated>,
       },
       {
         path : "form",
@@ -53,10 +54,13 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  );
+<>
+      <RouterProvider router={router}/>
+  <Toaster/>
+      </> 
+    
+    
+  )
 }
 
 export default App;
