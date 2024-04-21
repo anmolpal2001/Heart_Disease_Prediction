@@ -34,7 +34,7 @@ function Accordion(props) {
                     <div className="justify-center flex w-full items-center">
                     <PDFDownloadLink document={getDocumentHandler()} fileName='random.pdf'>
                     {({ blob, url, loading, error }) =>
-        loading ? 'Loading': 'Download'
+        loading ?   'Loading': 'Download'
       }
         </PDFDownloadLink> 
 
