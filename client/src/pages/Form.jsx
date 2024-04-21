@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 function Form() {
   const [data, setData] = useState({});
-const currentUser=useSelector((state)=>state.auth.currentUser)
+  const currentUser = useSelector((state) => state.auth.currentUser);
   const onChangeHandler = (e) => {
     setData((prev) => {
       return {
@@ -14,23 +14,37 @@ const currentUser=useSelector((state)=>state.auth.currentUser)
     console.log(data);
   };
 
-  const submitHandler = async (event) => {
-    event.preventDefault();
-
+  const submitHandler = async (e) => {
+    e.preventDefault();
     try {
-      console.log(data);
+      const formData = {
+        age: Number(data.age),
+        sex: Number(data.sex),
+        cp: Number(data.cp),
+        trestbps: Number(data.testbps),
+        chol: Number(data.Cholesterol),
+        fbs: Number(data.fbs),
+        restecg: Number(data.restecg),
+        thalach: Number(data.thalach),
+        exang: Number(data.exang),
+        oldpeak: Number(data.oldpeak),
+        slope: Number(data.slope),
+        ca: Number(data.ca),
+        thal: Number(data.thal),
+      };
+      console.log(formData);
       const res = await fetch("http://localhost:4000/api/v1/heart/predict", {
         headers: {
           "Content-Type": "application/json",
-          Authorization:`Bearer ${currentUser.token}`
+          Authorization: `Bearer ${currentUser.token}`,
         },
         method: "POST",
-        body: JSON.stringify(data),
+        body: JSON.stringify(formData),
       });
       const pythonResponse = await res.json();
-      // if(pythonResponse.success){
-
-      // }
+      if(pythonResponse.success){
+        console.log(pythonResponse);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -54,7 +68,6 @@ const currentUser=useSelector((state)=>state.auth.currentUser)
                   id="age"
                   className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                   placeholder="Your Age"
-                  // value={data.age}
                   type="number"
                   min="0"
                   onChange={onChangeHandler}
@@ -69,7 +82,7 @@ const currentUser=useSelector((state)=>state.auth.currentUser)
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled>
+                  <option value="" disabled selected>
                     Select Gender
                   </option>
                   <option value="1">Male</option>
@@ -89,7 +102,7 @@ const currentUser=useSelector((state)=>state.auth.currentUser)
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled>
+                  <option value="" disabled selected>
                     Select Chest Pain
                   </option>
                   <option value="0">Typical angina</option>
@@ -139,7 +152,7 @@ const currentUser=useSelector((state)=>state.auth.currentUser)
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled>
+                  <option value="" disabled selected>
                     Select FBS
                   </option>
                   <option value="0">False</option>
@@ -156,7 +169,7 @@ const currentUser=useSelector((state)=>state.auth.currentUser)
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled>
+                  <option value="" disabled selected>
                     Select RES
                   </option>
                   <option value="0">Normal</option>
@@ -191,7 +204,7 @@ const currentUser=useSelector((state)=>state.auth.currentUser)
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled>
+                  <option value="" disabled selected>
                     Select Electrocardiographic
                   </option>
                   <option value="0">Absence of Exercise-Induced Angina</option>
@@ -222,7 +235,7 @@ const currentUser=useSelector((state)=>state.auth.currentUser)
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled>
+                  <option value="" disabled selected>
                     Select Slope
                   </option>
                   <option value="0">upsloping</option>
@@ -244,7 +257,7 @@ const currentUser=useSelector((state)=>state.auth.currentUser)
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled>
+                  <option value="" disabled selected>
                     Select CA
                   </option>
                   <option value="0">0</option>
@@ -262,7 +275,7 @@ const currentUser=useSelector((state)=>state.auth.currentUser)
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled>
+                  <option value="" disabled selected>
                     Select Thalassemia
                   </option>
                   <option value="1">Normal</option>
