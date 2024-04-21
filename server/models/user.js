@@ -19,14 +19,16 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    additional_info: {
+   
       gender : {
         type : String,
+        required:true
       },
-      age : {
+      dob : {
         type : String,
+        required:true
       },
-    },
+    
     profilePic: {
       type: String,
       required: true,
