@@ -333,7 +333,7 @@ function Form() {
           </div>
           <div>
             {remaining && (
-              <p className="text-red-500 text-center m-1 font-bold">
+              <p className="text-red-500 text-center m-1 ">
                 {remaining.toUpperCase()}
               </p>
             )}

@@ -11,8 +11,18 @@ const test = (req, res) => {
 const signup = async (req, res) => {
   try {
     const { firstName, lastName, email, password } = req.body;
+
+    if ((!firstName, !lastName, !email, !password)) {
+      return next(errorHandler(404, " All Detail Required"));
+    }
+
     const hashedpassword = bcryptjs.hashSync(password, 10);
     console.log(firstName, email, password, lastName);
+
+    const alreadyPresent = await User.findOne({ email });
+    if (alreadyPresent) {
+      return next(errorHandler(404, "User Already present"));
+    }
 
     const data = await User.create({
       firstName,
@@ -97,11 +107,13 @@ const forgetPassword = async (req, res) => {
       email,
     };
 
-    const token = jwt.sign(payload, process.env.CHANGE_PASSWORD_SECRET, { expiresIn: "5m" });
+    const token = jwt.sign(payload, process.env.CHANGE_PASSWORD_SECRET, {
+      expiresIn: "5m",
+    });
 
     const linkForChangePassword = `${process.env.CLIENT_URL}/reset-password/${validUser._id}/${token}`;
     console.log(linkForChangePassword);
-    await sendMail(email,'Reset Password',linkForChangePassword)
+    await sendMail(email, "Reset Password", linkForChangePassword);
     return res.status(200).json({
       success: true,
       message: "Link for change password has been sent to your email",
@@ -161,4 +173,4 @@ const changePassword = async (req, res) => {
   }
 };
 
-export { test, signup, signin, logout, forgetPassword, changePassword}
+export { test, signup, signin, logout, forgetPassword, changePassword };
