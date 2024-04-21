@@ -13,6 +13,7 @@ import Results from "./pages/Results";
 import Authenticated from "./components/Authenticated";
 import { Toaster } from "react-hot-toast";
 import Profile from "./pages/Profile";
+import Output from "./pages/Output";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/output",
+        element: <Output />,
       },
       {
         path: "*",
