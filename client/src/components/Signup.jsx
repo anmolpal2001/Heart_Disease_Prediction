@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { AiOutlineMail, AiOutlineRadiusBottomleft } from "react-icons/ai";
+
+// import { AiOutlineMail, AiOutlineRadiusBottomleft } from "react-icons/ai";
 import { BiSolidUser } from "react-icons/bi";
-import {
-  loginStart,
-  loginFailure,
-  loginSuccess,
-} from "../redux/auth/authSlice";
+// import {
+//   loginStart,
+//   loginFailure,
+//   loginSuccess,
+// } from "../redux/auth/authSlice";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 const Signup = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",
