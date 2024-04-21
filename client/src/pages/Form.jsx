@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 function Form() {
   const dummy = {
@@ -19,10 +19,10 @@ function Form() {
     ca: "",
     thal: "",
   };
-  const [success, setSuccess] = useState(false);
-  const [output, setOutput] = useState([]);
+  // const [success, setSuccess] = useState(false);
+  // const [output, setOutput] = useState([]);
   const [data, setData] = useState(dummy);
-  const [remaining, setRemaining] = useState("");
+  // const [remaining, setRemaining] = useState("");
   const currentUser = useSelector((state) => state.auth.currentUser);
   const onChangeHandler = (e) => {
     setData((prev) => {
@@ -60,11 +60,11 @@ function Form() {
         if (!data[key]) {
           // console.log("nooo", key);
           toast.error(`Please enter the ${key}`)
-          setRemaining(`Missing field: ${key}`);
+          // setRemaining(`Missing field: ${key}`);
           return;
         }
       }
-      setRemaining("");
+      // setRemaining("");
 
       const formData = {
         age: Number(data.age),
@@ -95,7 +95,7 @@ function Form() {
       if (pythonResponse.success) {
         toast.success('Form submitted successfully')
         console.log(pythonResponse);
-        setOutput(pythonResponse.prediction);
+        // setOutput(pythonResponse.prediction);
       }
       else{
         toast.error('Internal Server Error')
