@@ -97,8 +97,8 @@ function Form() {
   };
 
   return (
-    <div className="bg-[#f7f7f7] max-w-full max-h-full rounded-lg ">
-      <div className="w-5/6 bg-white m-auto  md:w-3/4">
+    <div className="bg-[#f7f7f7] max-w-full max-h-full rounded-lg flex">
+      <div className="w-5/6 bg-white m-auto  md:w-3/4 my-5">
         <div className="bg-[#2a8683] p-4 text-center text-2xl font-bold text-white rounded-t-lg">
           Form Details
         </div>
@@ -112,7 +112,7 @@ function Form() {
                 </label>
                 <input
                   id="age"
-                  className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                   placeholder="Your Age"
                   type="number"
                   min="0"
@@ -128,7 +128,7 @@ function Form() {
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled selected>
+                  <option value="" disabled selected className="text-gray-700">
                     Select Gender
                   </option>
                   <option value="1">Male</option>
@@ -168,7 +168,7 @@ function Form() {
                 </label>
                 <input
                   id="testbps"
-                  className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                   placeholder="The persons resting blood pressure"
                   onChange={onChangeHandler}
                 />
@@ -184,7 +184,7 @@ function Form() {
 
                 <input
                   id="Cholesterol"
-                  className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                   placeholder="The persons resting blood pressure"
                   onChange={onChangeHandler}
                 />
@@ -235,7 +235,7 @@ function Form() {
                 </label>
                 <input
                   id="thalach"
-                  className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                   placeholder="The persons maximum heart rate achieved"
                   onChange={onChangeHandler}
                 />
@@ -267,7 +267,7 @@ function Form() {
                 </label>
                 <input
                   id="oldpeak"
-                  className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                   placeholder="ST depression caused by activity in comparison to rest"
                   onChange={onChangeHandler}
                 />
@@ -333,7 +333,7 @@ function Form() {
           </div>
           <div>
             {remaining && (
-              <p className="text-red-700 text-center m-1">
+              <p className="text-red-500 text-center m-1 font-bold">
                 {remaining.toUpperCase()}
               </p>
             )}
@@ -341,7 +341,7 @@ function Form() {
           <div className="justify-center flex w-full">
             <button
               type="submit"
-              className="py-2 px-4  bg-[#2A8683] text-lg  text-white  transition ease-in duration-200 text-center font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg w-1/4"
+              className="w-1/3 py-2 bg-[#2A8683] text-lg  text-white  transition ease-in duration-200 text-center font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg md:w-1/4"
             >
               Submit
             </button>
