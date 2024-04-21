@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/auth/authSlice";
 import UserNavigationPanel from "./UserNavigation";
+import toast from "react-hot-toast";
 const Navbar = () => {
   const [userNavPanel, setUserNavPanel] = useState(false);
   const currentUser = useSelector((state) => state.auth.currentUser);
@@ -25,11 +26,16 @@ const Navbar = () => {
       const response = await fetch("http://localhost:4000/api/v1/auth/logout");
       const data = await response.json();
       if (data.success) {
+        toast.success(data.message)
         dispatch(logout());
         navigate("/");
-        console.log(data);
+        // console.log(data);
+      }
+      else{
+        toast.error(data.message)
       }
     } catch (error) {
+      toast.error(error)
       console.log(error);
     }
   };

@@ -14,13 +14,8 @@ function AccordionComponent(props) {
                 
                     <Accordion 
                       
-                        title={`${props.date} || ${props.reportId}`}
-                        data='Some placeholder content for the collapse component. This panel is
-                        hidden by default but revealed when the user activates the relevant
-                        trigger. Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                        Error, culpa cum maxime consequuntur debitis eum magni eligendi veniam
-                        dolorem quos perferendis distinctio enim asperiores. Officia
-                        recusandae accusantium quas voluptatibus nesciunt!'
+                        title={`Report-Id : #${props.date} || Date : ${props.reportId}`}
+                        data={props.data}
                         isOpen={props.show} 
                         toggleResult={childToggle}
                     /> 

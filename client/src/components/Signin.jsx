@@ -3,8 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../redux/auth/authSlice";
 import { Navigate } from "react-router-dom";
+import{ toast }from 'react-hot-toast'
+
 const Signin = () => {
   const navigate = useNavigate();
+  const [loading,setLoading] = useState(false);
   const currentUser = useSelector((state) => state.auth.currentUser);
   const dispatch = useDispatch();
   const [data, setData] = useState({
@@ -13,7 +16,9 @@ const Signin = () => {
   });
   const submitHandler = async (event) => {
     event.preventDefault();
+    
     try {
+      setLoading(true)
       const res = await fetch("http://localhost:4000/api/v1/auth/signin", {
         headers: {
           "Content-Type": "application/json",
@@ -24,17 +29,27 @@ const Signin = () => {
       const response = await res.json();
       console.log(response);
       if (response.success) {
+        setLoading(false)
+        toast.success(`${response.message}`)
         dispatch(loginSuccess(response));
         navigate("/");
+        setData(() => {
+          return {
+            email: "",
+            password: "",
+          };
+        });
+      }
+      else{
+      toast.error(response.message)
+      setLoading(false)
       }
 
-      setData(() => {
-        return {
-          email: "",
-          password: "",
-        };
-      });
-    } catch (err) {}
+    
+    } catch (err) {
+      toast.error(err)
+      setLoading(false)
+    }
   };
   const onChangeHandler = (event) => {
     setData((prev) => {
@@ -117,7 +132,7 @@ const Signin = () => {
                     type="submit"
                     className="py-2 px-4  bg-[#2A8683]  text-white w-full transition ease-in duration-200 text-center text-base font-bold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg  hover:bg-[#2a8683ee] "
                   >
-                    Login
+                    {loading ?  "loading...": "Login"}
                   </button>
                 </div>
               </form>

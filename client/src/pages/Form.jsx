@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+// import { Link } from "react-router-dom";
 
 function Form() {
   const dummy = {
@@ -17,9 +19,10 @@ function Form() {
     ca: "",
     thal: "",
   };
-
+  // const [success, setSuccess] = useState(false);
+  // const [output, setOutput] = useState([]);
   const [data, setData] = useState(dummy);
-  const [remaining, setRemaining] = useState("");
+  // const [remaining, setRemaining] = useState("");
   const currentUser = useSelector((state) => state.auth.currentUser);
   const onChangeHandler = (e) => {
     setData((prev) => {
@@ -53,14 +56,15 @@ function Form() {
       // }
 
       for (let key in data) {
-        console.log("hello", data[key]);
+        // console.log("hello", data[key]);
         if (!data[key]) {
-          console.log("nooo", key);
-          setRemaining(`Missing field: ${key}`);
+          // console.log("nooo", key);
+          toast.error(`Please enter the ${key}`)
+          // setRemaining(`Missing field: ${key}`);
           return;
         }
       }
-      setRemaining("");
+      // setRemaining("");
 
       const formData = {
         age: Number(data.age),
@@ -87,11 +91,17 @@ function Form() {
         body: JSON.stringify(formData),
       });
       const pythonResponse = await res.json();
-      console.log(pythonResponse);
+      // console.log(pythonResponse);
       if (pythonResponse.success) {
+        toast.success('Form submitted successfully')
         console.log(pythonResponse);
+        // setOutput(pythonResponse.prediction);
+      }
+      else{
+        toast.error('Internal Server Error')
       }
     } catch (err) {
+      toast.error(err)
       console.log(err);
     }
   };
@@ -124,13 +134,15 @@ function Form() {
                   Gender
                 </label>
                 <select
+              
                   id="gender"
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled selected className="text-gray-700">
+                  {/* <option value="" disabled selected className="text-gray-700">
                     Select Gender
-                  </option>
+                  </option> */}
+                  <option value="none" className="text-gray-700" defaultValue>Select Gender</option>
                   <option value="1">Male</option>
                   <option value="0">Female</option>
                 </select>
@@ -148,12 +160,12 @@ function Form() {
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled selected>
+                  <option value="none" className="text-gray-700" defaultValue>
                     Select Chest Pain
                   </option>
                   <option value="0">Typical angina</option>
                   <option value="1">Atypical angina</option>
-                  <option value="3">Non-anginal pain</option>
+                  <option value="2">Non-anginal pain</option>
                   <option value="3">Asymptomatic</option>
                 </select>
               </div>
@@ -198,7 +210,7 @@ function Form() {
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled selected>
+                  <option value="none" className="text-gray-700" defaultValue>
                     Select FBS
                   </option>
                   <option value="0">False</option>
@@ -215,7 +227,7 @@ function Form() {
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled selected>
+                  <option value="none" className="text-gray-700" defaultValue>
                     Select RES
                   </option>
                   <option value="0">Normal</option>
@@ -250,7 +262,7 @@ function Form() {
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled selected>
+                  <option value="none" className="text-gray-700" defaultValue>
                     Select Electrocardiographic
                   </option>
                   <option value="0">Absence of Exercise-Induced Angina</option>
@@ -281,7 +293,7 @@ function Form() {
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled selected>
+                  <option value="none" className="text-gray-700" defaultValue>
                     Select Slope
                   </option>
                   <option value="0">upsloping</option>
@@ -303,7 +315,7 @@ function Form() {
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled selected>
+                  <option value="none" className="text-gray-700" defaultValue>
                     Select CA
                   </option>
                   <option value="0">0</option>
@@ -321,7 +333,7 @@ function Form() {
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
-                  <option value="" disabled selected>
+                  <option value="none" className="text-gray-700" defaultValue>
                     Select Thalassemia
                   </option>
                   <option value="1">Normal</option>
@@ -331,13 +343,13 @@ function Form() {
               </div>
             </div>
           </div>
-          <div>
+          {/* <div>
             {remaining && (
               <p className="text-red-500 text-center m-1 ">
                 {remaining.toUpperCase()}
               </p>
             )}
-          </div>
+          </div> */}
           <div className="justify-center flex w-full">
             <button
               type="submit"
