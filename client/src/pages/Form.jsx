@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function Form() {
   const dummy = {
@@ -18,7 +19,8 @@ function Form() {
     ca: "",
     thal: "",
   };
-
+  const [success, setSuccess] = useState(false);
+  const [output, setOutput] = useState([]);
   const [data, setData] = useState(dummy);
   const [remaining, setRemaining] = useState("");
   const currentUser = useSelector((state) => state.auth.currentUser);
@@ -93,6 +95,7 @@ function Form() {
       if (pythonResponse.success) {
         toast.success('Form submitted successfully')
         console.log(pythonResponse);
+        setOutput(pythonResponse.prediction);
       }
       else{
         toast.error('Internal Server Error')
