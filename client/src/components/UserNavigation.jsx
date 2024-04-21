@@ -11,7 +11,6 @@ const UserNavigationPanel = ({ handleLogout }) => {
         handleLogout();
       };
 
-
   return (
     <AnimationWrapper
       transition={{ duration: 0.2 }}
