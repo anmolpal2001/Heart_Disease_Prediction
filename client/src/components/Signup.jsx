@@ -8,7 +8,7 @@ import { BiSolidUser } from "react-icons/bi";
 //   loginSuccess,
 // } from "../redux/auth/authSlice";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 const Signup = () => {
   // const dispatch = useDispatch();

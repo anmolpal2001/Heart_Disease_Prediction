@@ -29,7 +29,7 @@ const Navbar = () => {
         toast.success(data.message)
         dispatch(logout());
         navigate("/");
-        console.log(data);
+        // console.log(data);
       }
       else{
         toast.error(data.message)
