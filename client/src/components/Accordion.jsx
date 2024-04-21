@@ -6,12 +6,12 @@ import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 function Accordion(props) {
   return (
     <div className="w-full ">
-        <div>
-              <PDFDownloadLink document={<MyDoc />} fileName="somename.pdf">
-                {({loading}) =>
-                  loading ? "" : <button className="flex justify-center items-center"> <IoMdDownload  className="" /> <span>Download</span></button>
-                }
+        <div className="flex justify-end mb-2">
+           
+              <PDFDownloadLink document={<MyDoc />} fileName={`${Date.now()}`}>
+                <button className="flex justify-center items-center"> <IoMdDownload  className="" /> <span>Download</span></button>    
               </PDFDownloadLink>
+              
             </div>
       <div className="border rounded-md mb-1 ">
         <button

@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     padding: 20, //added
   },
   title: {
+    position: "absolute",
     fontSize: 24,
     textAlign: "center",
     marginBottom: 20, //added
@@ -34,12 +35,12 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     marginHorizontal: 100,
   },
-  header: {
-    fontSize: 12,
-    marginBottom: 20,
-    textAlign: "center",
-    color: "grey",
-  },
+  // header: {
+  //   fontSize: 12,
+  //   marginBottom: 20,
+  //   textAlign: "center",
+  //   color: "grey",
+  // },
   pageNumber: {
     position: "absolute",
     fontSize: 12,
@@ -55,18 +56,13 @@ const MyDoc = () => (
   <Document>
     <Page style={styles.page}>
       <View style={styles.body}>
-        <Text style={styles.header} fixed>
-          Report
-        </Text>
-        <Text style={styles.title}>Report Title</Text>
+    
+        <Text style={styles.title}>Report</Text>
         <Image style={styles.image} src={logo} />
         <Text style={styles.text}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-          odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla
-          quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent
-          mauris. Fusce nec tellus sed augue semper porta. Mauris massa.
-          Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad
-          litora torquent per conubia nostra, per inceptos himenaeos.
+          <ul>
+            <li>hero</li>
+          </ul>
         </Text>
         <Text
           style={styles.pageNumber}
