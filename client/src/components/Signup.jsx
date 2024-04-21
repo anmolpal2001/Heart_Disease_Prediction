@@ -156,9 +156,9 @@ const Signup = () => {
                 to="/sign-in"
                 className="inline-flex items-center text-xs font-light text-center text-gray-600 hover:text-gray-700 dark:text-gray-100 dark:hover:text-white"
               >
-                <span className="ml-2 text-gray-600">
+                <span className="ml-2 text-gray-600 text-base">
                   Have an account?{" "}
-                  <span className=" text-blue-500 hover:text-gray-700">
+                  <span className=" text-[#386BC0]">
                     Sign In
                   </span>
                 </span>
