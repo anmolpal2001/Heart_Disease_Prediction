@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../redux/auth/authSlice";
 import { Navigate } from "react-router-dom";
+import{ toast }from 'react-hot-toast'
 const Signin = () => {
   const navigate = useNavigate();
   const currentUser = useSelector((state) => state.auth.currentUser);
@@ -13,6 +14,7 @@ const Signin = () => {
   });
   const submitHandler = async (event) => {
     event.preventDefault();
+    
     try {
       const res = await fetch("http://localhost:4000/api/v1/auth/signin", {
         headers: {
@@ -24,17 +26,24 @@ const Signin = () => {
       const response = await res.json();
       console.log(response);
       if (response.success) {
+        toast.success(`${response.message}`)
         dispatch(loginSuccess(response));
         navigate("/");
+        setData(() => {
+          return {
+            email: "",
+            password: "",
+          };
+        });
+      }
+      else{
+      toast.error(response.message)
       }
 
-      setData(() => {
-        return {
-          email: "",
-          password: "",
-        };
-      });
-    } catch (err) {}
+    
+    } catch (err) {
+      toast.error(err)
+    }
   };
   const onChangeHandler = (event) => {
     setData((prev) => {

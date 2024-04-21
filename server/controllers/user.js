@@ -12,8 +12,13 @@ const signup = async (req, res) => {
   try {
     const { firstName, lastName, email, password } = req.body;
     const hashedpassword = bcryptjs.hashSync(password, 10);
-    console.log(firstName, email, password, lastName);
-
+    // console.log(firstName, email, password, lastName);
+if(!firstName||!lastName||!email||!password){
+  return res.status(400).json({
+    success:false,
+    message:'Please fill all the details'
+  })
+}
     const data = await User.create({
       firstName,
       lastName,
@@ -25,6 +30,7 @@ const signup = async (req, res) => {
     res.status(200).json({
       success: true,
       data: data,
+      message:'Account created successfully'
     });
   } catch (err) {
     // next(err);
@@ -40,16 +46,20 @@ const signup = async (req, res) => {
 
 const signin = async (req, res, next) => {
   try {
+
     const { email, password } = req.body;
+    if(!email||!password){
+      return next(errorHandler(400,'Please fill all the details'))
+    }
     const validUser = await User.findOne({ email });
 
-    if (!validUser) return next(errorHandler(404, "User Is Not Available"));
+    if (!validUser) return next(errorHandler(404, "User does not exsist"));
 
     const validPass = bcryptjs.compareSync(password, validUser.password);
-    console.log(`email:${email} password:${password}`);
+    // console.log(`email:${email} password:${password}`);
 
     if (!validPass)
-      return next(errorHandler(404, "Username and Password Does Not Match"));
+      return next(errorHandler(404, "Wrong Password"));
 
     const { password: userPass, ...sendData } = validUser._doc;
 
@@ -60,7 +70,7 @@ const signin = async (req, res, next) => {
     res
       .cookie("token", token, { httpOnly: true, expires: expiryDate })
       .status(200)
-      .json({ success: true, sendData, token });
+      .json({ success: true, sendData, token ,message:'Sign-in Successfull'});
   } catch (err) {
     next(err);
   }

@@ -11,7 +11,7 @@ import ResetPassword from "./pages/ResetPassword";
 import ForgetPassword from "./pages/ForgetPassword";
 import Results from "./pages/Results";
 import Authenticated from "./components/Authenticated";
-
+import toast, { Toaster } from 'react-hot-toast';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -54,10 +54,13 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  );
+<>
+      <RouterProvider router={router}/>
+  <Toaster/>
+      </> 
+    
+    
+  )
 }
 
 export default App;
