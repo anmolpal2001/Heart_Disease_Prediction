@@ -5,6 +5,7 @@ import User from "../models/user.js";
 const predict = async (req, res) => {
   try {
     const formData = req.body;
+    console.log(formData);
     const userId = req.user.id;
     const user = await User.findById(userId);
     const inputData = Object.values(formData);
@@ -36,21 +37,21 @@ const predict = async (req, res) => {
         const outputJson = JSON.parse(pythonOutput);
 
         const heartData = await Heart.create({
-          age : formData.age,
-          sex : formData.sex,
-          cp : formData.cp,
-          trestbps : formData.trestbps,
-          cholesterol : formData.chol,
-          fbs : formData.fbs,
-          restecg : formData.restecg,
-          thalach : formData.thalach,
-          exang : formData.exang,
-          oldpeak : formData.oldpeak,
-          slope : formData.slope,
-          ca : formData.ca,
-          thal : formData.thal,
-          target : outputJson.messageCode,
-        })
+          age: formData.age,
+          sex: formData.sex,
+          cp: formData.cp,
+          trestbps: formData.trestbps,
+          cholesterol: formData.chol,
+          fbs: formData.fbs,
+          restecg: formData.restecg,
+          thalach: formData.thalach,
+          exang: formData.exang,
+          oldpeak: formData.oldpeak,
+          slope: formData.slope,
+          ca: formData.ca,
+          thal: formData.thal,
+          target: outputJson.messageCode,
+        });
 
         user.previousResults.push(heartData._id);
         await user.save();
@@ -71,25 +72,27 @@ const predict = async (req, res) => {
       }
     });
   } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send({ error: "Internal server error" });
+  }
+};
+
+const getResults = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const results = await User.findById(userId)
+      .populate("previousResults")
+      .exec();
+    const resultData = results.previousResults;
+    return res.status(200).json({
+      success: true,
+      previousResults: resultData,
+      message: "Results fetched successfully",
+    });
+  } catch (error) {
     console.error("Error:", errorMessage);
     res.status(500).send({ error: "Internal server error" });
   }
 };
 
-const getResults = async (req,res) => {
-  try {
-    const userId = req.user.id;
-    const results = await User.findById(userId).populate("previousResults").exec();
-    const resultData = results.previousResults;
-    return res.status(200).json({
-      success : true,
-      previousResults : resultData,
-      message : "Results fetched successfully",
-    });
-  }catch(error) {
-    console.error("Error:", errorMessage);
-    res.status(500).send({ error: "Internal server error" });
-  }
-}
-
-export { predict,getResults };
+export { predict, getResults };

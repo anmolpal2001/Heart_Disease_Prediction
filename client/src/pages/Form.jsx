@@ -2,7 +2,24 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 function Form() {
-  const [data, setData] = useState({});
+  const dummy = {
+    age: "",
+    gender: "",
+    chestpain: "",
+    testbps: "",
+    Cholesterol: "",
+    fbs: "",
+    restecg: "",
+    thalach: "",
+    exang: "",
+    oldpeak: "",
+    slope: "",
+    ca: "",
+    thal: "",
+  };
+
+  const [data, setData] = useState(dummy);
+  const [remaining, setRemaining] = useState("");
   const currentUser = useSelector((state) => state.auth.currentUser);
   const onChangeHandler = (e) => {
     setData((prev) => {
@@ -17,10 +34,38 @@ function Form() {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
+      // if (
+      //   !data.age ||
+      //   !data.sex ||
+      //   !data.cp ||
+      //   !data.testbps ||
+      //   !data.Cholesterol ||
+      //   !data.fbs ||
+      //   !data.restecg ||
+      //   !data.thalach ||
+      //   !data.exang ||
+      //   !data.oldpeak ||
+      //   !data.slope ||
+      //   !data.ca ||
+      //   !data.thal
+      // ) {
+      //   return;
+      // }
+
+      for (let key in data) {
+        console.log("hello", data[key]);
+        if (!data[key]) {
+          console.log("nooo", key);
+          setRemaining(`Missing field: ${key}`);
+          return;
+        }
+      }
+      setRemaining("");
+
       const formData = {
         age: Number(data.age),
-        sex: Number(data.sex),
-        cp: Number(data.cp),
+        sex: Number(data.gender),
+        cp: Number(data.chestpain),
         trestbps: Number(data.testbps),
         chol: Number(data.Cholesterol),
         fbs: Number(data.fbs),
@@ -42,7 +87,7 @@ function Form() {
         body: JSON.stringify(formData),
       });
       const pythonResponse = await res.json();
-      if(pythonResponse.success){
+      if (pythonResponse.success) {
         console.log(pythonResponse);
       }
     } catch (err) {
@@ -78,7 +123,7 @@ function Form() {
                   Gender
                 </label>
                 <select
-                  id="sex"
+                  id="gender"
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
@@ -98,7 +143,7 @@ function Form() {
                   Chest Pain
                 </label>
                 <select
-                  id="cp"
+                  id="chestpain"
                   onChange={onChangeHandler}
                   className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 >
@@ -284,6 +329,13 @@ function Form() {
                 </select>
               </div>
             </div>
+          </div>
+          <div>
+            {remaining && (
+              <p className="text-red-700 text-center m-1">
+                {remaining.toUpperCase()}
+              </p>
+            )}
           </div>
           <div className="justify-center flex w-full">
             <button
