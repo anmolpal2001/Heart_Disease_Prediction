@@ -10,6 +10,7 @@ import PageNotFound from "./pages/404";
 import ResetPassword from "./pages/ResetPassword";
 import ForgetPassword from "./pages/ForgetPassword";
 import Results from "./pages/Results";
+import Authenticated from "./components/Authenticated";
 
 const router = createBrowserRouter([
   {
@@ -22,11 +23,11 @@ const router = createBrowserRouter([
       },
       {
         path: "sign-up",
-        element: <SignUpPage />,
+        element: <Authenticated><SignUpPage /></Authenticated>,
       },
       {
         path: "sign-in",
-        element: <SignInPage />,
+        element: <Authenticated><SignInPage /></Authenticated>,
       },
       {
         path : "form",

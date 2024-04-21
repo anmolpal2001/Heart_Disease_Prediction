@@ -5,9 +5,7 @@ const SignInPage = () => {
   const isAuth=useSelector((state)=> state.auth.isAuthenticated)
   return (
     <div>
-     {/* {isAuth ? (<Navigate to="/form"/>):(<Signin />)} */}
-     <Signin/>
-   
+     {isAuth ? (<Navigate to="/"/>):(<Signin />)}
     </div>
   )
 }

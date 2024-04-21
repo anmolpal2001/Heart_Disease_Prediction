@@ -5,7 +5,7 @@ import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 
 function Accordion(props) {
   return (
-    <div className="w-full ">
+    <div className="w-full">
         <div>
               <PDFDownloadLink document={<MyDoc />} fileName="somename.pdf">
                 {({loading}) =>
