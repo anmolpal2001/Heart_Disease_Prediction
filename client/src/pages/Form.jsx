@@ -56,7 +56,7 @@ function Form() {
       // }
 
       for (let key in data) {
-        console.log("hello", data[key]);
+        // console.log("hello", data[key]);
         if (!data[key]) {
           // console.log("nooo", key);
           toast.error(`Please enter the ${key}`)
@@ -165,7 +165,7 @@ function Form() {
                   </option>
                   <option value="0">Typical angina</option>
                   <option value="1">Atypical angina</option>
-                  <option value="3">Non-anginal pain</option>
+                  <option value="2">Non-anginal pain</option>
                   <option value="3">Asymptomatic</option>
                 </select>
               </div>
