@@ -33,7 +33,7 @@ navigate('/')
   }})
 }
 catch(err){
-  
+ console.log(err) 
 }
   }
   const onChangeHandler=(event)=>{
