@@ -159,7 +159,7 @@ const predict = async (req, res) => {
         });
       } else {
         // Return status code and error message
-        res.status(code).json({
+        res.status(500).json({
           success: false,
           error: pythonError,
         });
