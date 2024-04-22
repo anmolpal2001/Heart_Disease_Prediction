@@ -73,11 +73,6 @@ const signin = async (req, res, next) => {
       sameSite: "strict", // Adjust SameSite attribute as needed
       expires: expiryDate,
     };
-
-    if (process.env.NODE_ENV === "production") {
-      cookieOptions.secure = true;
-    }
-
     res
       .cookie("token", token, cookieOptions)
       .status(200)
