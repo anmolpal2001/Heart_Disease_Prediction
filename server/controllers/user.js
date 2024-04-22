@@ -8,38 +8,36 @@ const test = (req, res) => {
   res.send("Test route");
 };
 
-const signup = async (req, res) => {
+const signup = async (req, res, next) => {
   try {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, gender, dob } = req.body;
 
-    if ((!firstName, !lastName, !email, !password)) {
-      return next(errorHandler(404, " All Detail Required"));
+    if (!firstName || !lastName || !email || !password || !gender || !dob) {
+      return next(errorHandler(404, "Please fill all the details"));
+    }
+    const checkUser = await User.findOne({ email });
+    if (checkUser) {
+      return next(errorHandler(404, "User Already Exist With This Email"));
     }
 
     const hashedpassword = bcryptjs.hashSync(password, 10);
-    // console.log(firstName, email, password, lastName);
-    if (!firstName || !lastName || !email || !password) {
-      return res.status(400).json({
-        success: false,
-        message: "Please fill all the details",
-      });
-    }
-    const data = await User.create({
+    const user = await User.create({
       firstName,
       lastName,
       email,
       password: hashedpassword,
-      profilePic: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName}+${lastName}`,
+      // profilePic: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName}+${lastName}`,
+      profilePic: `https://api.dicebear.com/8.x/avataaars/svg?seed=${firstName}+${lastName}`,
+      gender,
+      dob,
     });
-    data.password = null;
+    user.password = null;
     res.status(200).json({
       success: true,
-      data: data,
+      user,
       message: "Account created successfully",
     });
   } catch (err) {
-    // next(err);
-    // next(errorHandler(404, "User Is Not Available"));
     console.log(err);
     res.status(500).json({
       success: false,
@@ -176,30 +174,44 @@ const changePassword = async (req, res) => {
   }
 };
 
+const updateProfile = async (req, res) => {
+  try {
+    const {password} = req.body;
 
-const updatePassword=async(req,res)=>{
-  try{
-    const newPassword=req.body.password
-  
-    if(newPassword.length===0||!newPassword){
+    if (password.length === 0 || !password) {
       return res.status(400).json({
-        message:'Password is undefined',
-        success:false
-
-      })
+        message: "Password is undefined",
+        success: false,
+      });
     }
-    const hashedPassword=bcryptjs.hash(newPassword,10)
-const user=await User.findByIdAndUpdate(req.user.id,{
-  password:hashedPassword
-},{new:true})
+    const hashedpassword = bcryptjs.hashSync(password, 10);
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      {
+        password: hashedpassword,
+      },
+      { new: true }
+    );
 
-return res.status(200).json({
-  message:'Password updated successfully',
-  success:true,
-})
+    return res.status(200).json({
+      message: "Password updated successfully",
+      success: true,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: "Error while updating password, please try again",
+      err: err,
+    });
   }
-  catch(err){
-
-  }
-}
-export { test, signup, signin, logout, forgetPassword, changePassword,updatePassword};
+};
+export {
+  test,
+  signup,
+  signin,
+  logout,
+  forgetPassword,
+  changePassword,
+  updateProfile,
+};
