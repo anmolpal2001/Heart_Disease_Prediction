@@ -26,6 +26,7 @@ const Signin = () => {
         },
         method: "POST",
         body: JSON.stringify(data),
+        credentials: "include",
       });
       const response = await res.json();
       console.log(response);

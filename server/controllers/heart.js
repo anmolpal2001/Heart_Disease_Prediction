@@ -122,7 +122,7 @@ const predict = async (req, res) => {
 
     pythonProcess.stderr.on("data", (data) => {
       pythonError += data.toString();
-      console.error(errorMessage);
+      // console.error(errorMessage);
     });
 
     pythonProcess.on("exit", async (code) => {

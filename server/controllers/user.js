@@ -68,8 +68,18 @@ const signin = async (req, res, next) => {
 
     const expiryDate = new Date((Date.now() / 1000 + 60 * 60 * 24 * 10) * 1000);
     // const expiryDate = new Date((Date.now() / 1000 + 60) * 1000);
+    const cookieOptions = {
+      httpOnly: false,
+      sameSite: "strict", // Adjust SameSite attribute as needed
+      expires: expiryDate,
+    };
+
+    if (process.env.NODE_ENV === "production") {
+      cookieOptions.secure = true;
+    }
+
     res
-      .cookie("token", token, { httpOnly: true, expires: expiryDate })
+      .cookie("token", token, cookieOptions)
       .status(200)
       .json({ success: true, sendData, token, message: "Sign-in Successfull" });
   } catch (err) {

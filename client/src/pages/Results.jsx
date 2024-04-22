@@ -1,32 +1,14 @@
 import React from "react";
-
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AccordionComponent from "../components/AccordionComponent";
-const DUMMy = [
-  {
-    date: "10 may",
-    reportId: "1234",
-    val: {
-      age: 22,
-      sex: 0,
-      cp: 0,
-      trestbps: 138,
-      chol: 294,
-      fbs: 1,
-      restecg: 1,
-      thalach: 106,
-      exang: 0,
-      oldpeak: 1.9,
-      slope: 1,
-      ca: 3,
-      thal: 2,
-    },
-  },
-];
+import {outputClear} from "../redux/output/outputSlice";
+
 function Results() {
   const currentUser = useSelector((state) => state.auth.currentUser);
   const [resultData, setResultData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
   let temp = [];
   useEffect(() => {
     const getAllData = async () => {
@@ -126,6 +108,7 @@ function Results() {
           temp.push({ date, reportId, val });
         });
         setResultData(temp);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -144,20 +127,24 @@ function Results() {
   return (
     <>
       <div className="bg-[#F7F7F7] lg:px-6 py-2.5 min-h-screen">
-      <div className="mx-auto max-w-screen-2xl lg:mx-20 flex flex-col justify-center items-center">
-        <div className="sm:px-4 lg:px-14 max-w-screen-2xl w-full mx-auto">
-            {resultData.map((item, index) => (
-              <div key={index}>
-                <AccordionComponent
-                  toggleResult={toggle}
-                  index={index}
-                  data={item.val}
-                  show={index === openIndex}
-                  date={item.date}
-                  reportId={item.reportId}
-                />
-              </div>
-            ))}
+        <div className="mx-auto max-w-screen-2xl lg:mx-20 flex flex-col justify-center items-center">
+          <div className="sm:px-4 lg:px-14 max-w-screen-2xl w-full mx-auto">
+            {loading && <p className="text-center my-10 text-xl">Loading...</p>}
+            {!loading && resultData.length === 0 && <p className="text-center my-10 text-xl">No result found</p>}
+            {!loading &&
+              resultData.length > 0 &&
+              resultData.map((item, index) => (
+                <div key={index}>
+                  <AccordionComponent
+                    toggleResult={toggle}
+                    index={index}
+                    data={item.val}
+                    show={index === openIndex}
+                    date={item.date}
+                    reportId={item.reportId}
+                  />
+                </div>
+              ))}
           </div>
         </div>
       </div>

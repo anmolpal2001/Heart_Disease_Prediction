@@ -3,27 +3,18 @@ import bg from "../assets/bg.png";
 import doctor from "../assets/doc.png";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import BeatLoader from "react-spinners/BeatLoader";
 
 const Home = () => {
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
   const getReportHandler = (event) => {
     navigate("/form");
   };
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false); // Set loading state to false after 2 seconds
-    }, 5000);
-    return () => clearTimeout(timer);
-  });
   const getReportHistory = () => {
     navigate("/reports");
   };
   return (
     <>
-      {!loading ? (
         <div className="bg-[#F7F7F7] border-gray-200 px-4 lg:px-6 py-2.5">
           <div className="mx-auto max-w-screen-xl">
             <div className="px-4 lg:px-14 max-w-screen-2xl mx-auto h-full">
@@ -81,11 +72,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-      ) : (
-        <div className="flex justify-center items-center h-screen">
-          <BeatLoader color="#2A8683" loading={true} size={15} />
-        </div>
-      )}
     </>
   );
 };

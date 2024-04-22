@@ -59,10 +59,10 @@ def load_data():
 #     return logReg_model
 
 def train_model(X_train, Y_train):
-    scaler = StandardScaler()
-    X_train_scaled = scaler.fit_transform(X_train)
-    logReg_model = LogisticRegression(max_iter=1000)  # Increase max_iter
-    logReg_model.fit(X_train_scaled, Y_train)
+    # scaler = StandardScaler()
+    # X_train_scaled = scaler.fit_transform(X_train)
+    logReg_model = LogisticRegression()  # Increase max_iter
+    logReg_model.fit(X_train, Y_train)
     return logReg_model
 
 # if __name__ == "__main__":

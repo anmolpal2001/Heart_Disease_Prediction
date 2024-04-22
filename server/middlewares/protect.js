@@ -4,6 +4,7 @@ dotenv.config();
 
 const protect = async (req, res,next) => {
   try {
+    console.log(req.cookies.token)
     const token = req.body.token || req.cookies.token || req.headers.authorization.split(" ")[1];
     console.log()
     if (!token || token == undefined || token == "") {

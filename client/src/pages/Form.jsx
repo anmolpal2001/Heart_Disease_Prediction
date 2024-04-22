@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
+import { outputFailure,outputStart,outputSuccess } from "../redux/output/outputSlice";
+import { useNavigate } from "react-router-dom";
 
 function Form() {
   const dummy = {
@@ -19,19 +21,16 @@ function Form() {
     ca: "",
     thal: "",
   };
-  // const [success, setSuccess] = useState(false);
-  // const [output, setOutput] = useState([]);
+  const dispatch = useDispatch();
   const [data, setData] = useState(dummy);
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const currentUser = useSelector((state) => state.auth.currentUser);
   const onChangeHandler = (e) => {
-    setData((prev) => {
-      return {
-        ...prev,
-        [e.target.id]: e.target.value,
-      };
-    });
-    console.log(data);
+    setData((prevData) => ({
+      ...prevData,
+      [e.target.id]: e.target.value,
+    }));
   };
 
   const submitHandler = async (e) => {
@@ -60,6 +59,7 @@ function Form() {
       };
       console.log(formData);
       setLoading(true);
+      dispatch(outputStart())
       const res = await fetch("http://localhost:4000/api/v1/heart/predict", {
         headers: {
           "Content-Type": "application/json",
@@ -70,15 +70,17 @@ function Form() {
       });
       const pythonResponse = await res.json();
       if (pythonResponse.success) {
-        setLoading(false);
         toast.success('Form submitted successfully')
         console.log(pythonResponse);
-        // setOutput(pythonResponse.prediction);
+        dispatch(outputSuccess(pythonResponse))
+        navigate('/form/output')
       }
       else{
         toast.error('Internal Server Error')
-        setLoading(false);
+        // setLoading(false);
       }
+      setLoading(false);
+      dispatch(outputFailure())
     } catch (err) {
       toast.error(err)
       setLoading(false);
@@ -87,7 +89,8 @@ function Form() {
   };
 
   return (
-    <div className="bg-[#f7f7f7] max-w-full max-h-full rounded-lg flex">
+    <>
+      <div className="bg-[#f7f7f7] max-w-full max-h-full rounded-lg flex">
       <div className="w-5/6 bg-white m-auto  md:w-3/4 my-5">
         <div className="bg-[#2a8683] p-4 text-center text-2xl font-bold text-white rounded-t-lg">
           Form Details
@@ -334,6 +337,7 @@ function Form() {
         </form>
       </div>
     </div>
+    </>
   );
 }
 

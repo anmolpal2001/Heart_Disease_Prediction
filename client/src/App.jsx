@@ -41,19 +41,20 @@ const router = createBrowserRouter([
       },
       {
         path: "form",
-        element: (
-          <Private>
-            <Form />
-          </Private>
-        ),
+        children : [
+          {
+            index : true,
+            element :<Private><Form /></Private>
+          },
+          {
+            path : "output",
+            element: <Private><Output /></Private>,
+          }
+        ]
       },
       {
         path: "/profile",
-        element: <Profile />,
-      },
-      {
-        path: "/output",
-        element: <Output />,
+        element: <Private><Profile/></Private>,
       },
       {
         path: "*",
@@ -69,7 +70,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/reports",
-        element: <Results />,
+        element: <Private><Results /></Private>,
       },
     ],
   },

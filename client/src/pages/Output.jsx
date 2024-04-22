@@ -1,27 +1,37 @@
 import React, { useState } from "react";
-import Form from "./Form";
-import { MdHealthAndSafety } from "react-icons/md";
-import { FaThumbsUp } from "react-icons/fa";
-import { FaThumbsDown } from "react-icons/fa";
-
+import { TfiFaceSad } from "react-icons/tfi";
 import { FaDownLong } from "react-icons/fa6";
 import { FaRegSmile } from "react-icons/fa";
-
-import { FaSmile } from "react-icons/fa";
-
-import { MdDownload } from "react-icons/md";
-
-import { Link } from "react-router-dom";
-
-//try
+import { Link,Navigate } from "react-router-dom";
+import { useSelector,useDispatch } from "react-redux";
+import { outputClear } from "../redux/output/outputSlice";
 
 function Output() {
-  const [yes, setYes] = useState(false);
-  const diagnosis = yes
+  const output = useSelector((state) => state.output.output);
+  const currentUser = useSelector((state) => state.auth.currentUser);
+  const dispatch = useDispatch();
+  console.log( output);
+  const messageCode = output ? output.prediction.messageCode : null;
+  console.log(messageCode);
+  function calculateAge(dateOfBirth) {
+    const dob = new Date(dateOfBirth);
+    const currentDate = new Date();
+    let age = currentDate.getFullYear() - dob.getFullYear();
+    if (currentDate.getMonth() < dob.getMonth() || 
+        (currentDate.getMonth() === dob.getMonth() && 
+         currentDate.getDate() < dob.getDate())) {
+        age--;
+    }
+    return age;
+}
+const handleOuput = () => {
+  dispatch(outputClear())
+}
+  const diagnosis = !messageCode
     ? "Our Analysis Indicates No Evidence Of Heart Disease Based On The Provided Data."
     : "Our Analysis Indicates The Presence Of Heart Disease Based On The Provided Data.";
 
-  const Recommendations = yes ? (
+  const recommendations = messageCode ? (
     <div>
       <p className="my-2">
         <span className="font-bold ">Consult a Healthcare Professional :</span>{" "}
@@ -49,7 +59,7 @@ function Output() {
       </p>
     </div>
   );
-  const nextStep = !yes ? (
+  const nextSteps = !messageCode ? (
     <div>
       <p className="my-2">
         <span className="font-bold">Preventive Measures :</span> Stay proactive
@@ -78,37 +88,34 @@ function Output() {
   );
 
   return (
-    <div className="flex justify-center items-center mt-4 mx-auto bg-slate-100">
+    <>
+      {output !== null ? <div className="flex justify-center items-center mt-4 mx-auto bg-slate-100">
       <div className="flex flex-col justify-center items-center w-4/5 px-6 py-8 bg-white rounded-lg md:px-8 lg:px-10 my-3">
-        {/* <MdHealthAndSafety className="text-[#2A8683] text-6xl mb-4" /> */}
-
         <h1 className="text-4xl font-bold mb-4 text-center text-[#2A8683]">
           Your Heart Report
         </h1>
 
         <div className="mb-4 w-[95%] sm:w-1/2">
           <div className="flex items-center justify-start ">
-            <span className="w-1/2">Name</span>
-            <span className="w-1/2">: name</span>
+            <span className="w-1/2">Name </span>
+            <span className="w-1/2">: {currentUser.sendData.firstName} {currentUser.sendData.lastName}</span>
           </div>
           <div className="flex items-center justify-start ">
             <span className="w-1/2">Age</span>
-            <span className="w-1/2">: name</span>
+            <span className="w-1/2">: {calculateAge(currentUser.sendData.dob)}</span>
           </div>
           <div className="flex items-center justify-start ">
             <span className="w-1/2">Gender</span>
-            <span className="w-1/2">: name</span>
+            <span className="w-1/2">: {currentUser.sendData.gender}</span>
           </div>
         </div>
         <div>
           <div className="flex justify-center items-center">
-            {/* {yes ? (
-              <FaThumbsUp className="text-[#2A8683] text-6xl mb-4 " />
+            {messageCode ? (
+              <TfiFaceSad  className="text-[#2A8683] text-6xl mb-4 " />
             ) : (
-              <FaThumbsDown className="text-[#2A8683] text-6xl mb-4 " />
-            )}
-            <FaSmile className="text-[#2A8683] text-6xl mb-4 " /> */}
             <FaRegSmile className="text-[#2A8683] text-6xl mb-4 " />
+            )}
           </div>
 
           <p className="mb-4 text-center">
@@ -121,9 +128,6 @@ function Output() {
         <div className="flex m-2 items-center justify-center border-t border-gray-400 w-full h-0"></div>
 
         <div className="m-4">
-          {/* <p className="text-[#2A8683] text-2xl text-center font-bold">
-            Diagnosis
-          </p> */}
           <p className="text-center text-lg">{diagnosis}</p>
         </div>
         <div className="flex m-2 items-center justify-center border-t border-gray-400 w-full h-0"></div>
@@ -132,7 +136,7 @@ function Output() {
           <p className="text-[#2A8683] text-2xl text-center font-bold mb-1">
             Recommendations
           </p>
-          <div>{Recommendations}</div>
+          <div>{recommendations}</div>
         </div>
         <div className="flex m-2 items-center justify-center border-t border-gray-400 w-full h-0"></div>
 
@@ -140,10 +144,10 @@ function Output() {
           <p className="text-[#2A8683] text-2xl text-center mb-1 font-bold">
             Next Steps
           </p>
-          <div>{nextStep}</div>
+          <div>{nextSteps}</div>
         </div>
 
-        <button className="m-2 hover:translate-y-1 transition-transform duration-300">
+        <button className="m-2 hover:translate-y-1 transition-transform duration-300" onClick={handleOuput}>
           <Link to="/reports" className="flex text-lg text-[#2A8683]">
             View Full Report
             <span className="flex justify-center mx-1 items-center text-[#2A8683] text-xl -rotate-90">
@@ -153,6 +157,9 @@ function Output() {
         </button>
       </div>
     </div>
+    : <Navigate to="/form" />
+    }
+    </>
   );
 }
 
