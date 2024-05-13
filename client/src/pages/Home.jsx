@@ -46,9 +46,7 @@ const Home = () => {
                       Wellness
                     </h1>
                     <p className="text-[#606E70] text-base mb-8">
-                      Medical professionals adhere to ethical standards and
-                      guidelines, prioritizing patient safety, confidentiality,
-                      and informed
+                    We will analyze, predict the result whether the patient has heart disease or normal 
                     </p>
                     <div className="flex">
                       <button

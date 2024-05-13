@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { TfiFaceSad } from "react-icons/tfi";
+import { FaRegThumbsUp } from "react-icons/fa";
+import { FaRegThumbsDown } from "react-icons/fa";
+
 import { FaDownLong } from "react-icons/fa6";
 import { FaRegSmile } from "react-icons/fa";
 import { Link,Navigate } from "react-router-dom";
@@ -112,9 +114,9 @@ const handleOuput = () => {
         <div>
           <div className="flex justify-center items-center">
             {messageCode ? (
-              <TfiFaceSad  className="text-[#2A8683] text-6xl mb-4 " />
+              <FaRegThumbsDown   className="text-[#2A8683] text-6xl mb-4 " />
             ) : (
-            <FaRegSmile className="text-[#2A8683] text-6xl mb-4 " />
+            <FaRegThumbsUp className="text-[#2A8683] text-6xl mb-4 " />
             )}
           </div>
 
