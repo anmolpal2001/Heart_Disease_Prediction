@@ -25,6 +25,7 @@ function Results() {
     };
     getAllData()
       .then((res) => {
+        console.log(res);
         res.previousResults.map((item) => {
           const date = item.createdAt;
           const reportId = item._id;
@@ -108,13 +109,15 @@ function Results() {
           temp.push({ date, reportId, val });
         });
         setResultData(temp);
+        temp = [];
         setLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
-
+    }, []);
+    console.log("Reseults", resultData);
+    
   const [openIndex, setOpenIndex] = useState(-1);
   const toggle = (index) => {
     if (index === openIndex) {

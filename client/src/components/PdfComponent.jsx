@@ -7,7 +7,7 @@ import {
   Image,
   StyleSheet,
 } from "@react-pdf/renderer";
-import logo from "../assets/logo.png";
+import logo from "../assets/heartt.png";
 // const styles = StyleSheet.create({
 //   body: {
 //     paddingTop: 35,
@@ -212,9 +212,9 @@ const MyDoc = ({ userData }) => (
         <View style={styles.line} />
         <View style={styles.section}>
           <Text style={styles.title}>Conclusion</Text>
-          <Text style={styles.subtitle}>Based on the analysis:</Text>
+          <Text style={styles.subtitle}>Based on our analysis :</Text>
           <Text style={styles.subtitle}>
-            John Doe's heart health appears to be within normal ranges for his
+          {userData.name}'s heart health appears to be within normal ranges for his
             age and gender. However, further evaluation and monitoring may be
             recommended by a healthcare professional to ensure optimal heart
             health.

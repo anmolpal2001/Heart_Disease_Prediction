@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../assets/logo.png";
+import logo from "../assets/heartt.png";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/auth/authSlice";
@@ -47,8 +47,8 @@ const Navbar = () => {
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <div>
             <Link to="/" className="flex items-center">
-              <img src={logo} className="w-full h-12" alt="Logo" />
-              <h1 className="text-2xl font-bold text-gray-800">HeartCare</h1>
+              <img src={logo} className="w-full h-12 mr-2" alt="Logo" />
+              <h1 className="text-3xl font-bold text-[#2A8683]">HeartCare</h1>
             </Link>
           </div>
           {isAuth ? (
@@ -59,9 +59,9 @@ const Navbar = () => {
                   onClick={handleUserNavPanel}
                   onBlur={handleBlur}
                 >
-                  <button className="w-10 h-10">
+                  <button className="w-10 h-10 border-2 rounded-full border-[#2A8683]">
                     <img
-                      src={currentUser.sendData.profilePic}
+                      src={currentUser && currentUser.sendData.profilePic}
                       alt=""
                       className="w-full h-full object-cover rounded-full"
                     />
