@@ -81,14 +81,17 @@ function Results() {
 
           const ca = item.ca;
           let thal;
-          if (item.thal === "1") {
+          if (item.thal === "0") {
             thal = "Normal";
           }
-          if (item.thal === "2") {
+          if (item.thal === "1") {
             thal = "Fixed defect";
           }
-          if (item.thal === "3") {
+          if (item.thal === "2") {
             thal = "Reversible defect";
+          }
+          if(item.thal === "3"){
+            thal = "Unknown"
           }
           let val = {
             sex,

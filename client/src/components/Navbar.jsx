@@ -51,7 +51,7 @@ const Navbar = () => {
               <h1 className="text-3xl font-bold text-[#2A8683]">HeartCare</h1>
             </Link>
           </div>
-          {isAuth ? (
+          {currentUser ? (
             <div className="flex items-center">
               <div className="flex items-center ms-3 relative">
                 <div

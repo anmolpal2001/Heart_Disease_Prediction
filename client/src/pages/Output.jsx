@@ -14,6 +14,8 @@ function Output() {
   const dispatch = useDispatch();
   console.log( output);
   const messageCode = output ? output.prediction.messageCode : null;
+  const age = output ? output.heartData.age : null;
+  const gender = output ? output.heartData.sex === 0 ? "Female" : "Male" : null;
   console.log(messageCode);
   function calculateAge(dateOfBirth) {
     const dob = new Date(dateOfBirth);
@@ -98,17 +100,19 @@ const handleOuput = () => {
         </h1>
 
         <div className="mb-4 w-[95%] sm:w-1/2">
-          <div className="flex items-center justify-start ">
+          {/* <div className="flex items-center justify-start ">
             <span className="w-1/2">Name </span>
             <span className="w-1/2">: {currentUser.sendData.firstName} {currentUser.sendData.lastName}</span>
-          </div>
+          </div> */}
           <div className="flex items-center justify-start ">
             <span className="w-1/2">Age</span>
-            <span className="w-1/2">: {calculateAge(currentUser.sendData.dob)}</span>
+            {/* <span className="w-1/2">: {calculateAge(currentUser.sendData.dob)}</span> */}
+            <span className="w-1/2">: {age}</span>
           </div>
           <div className="flex items-center justify-start ">
             <span className="w-1/2">Gender</span>
-            <span className="w-1/2">: {currentUser.sendData.gender}</span>
+            <span className="w-1/2">: {gender}</span>
+            {/* <span className="w-1/2">: {currentUser.sendData.gender}</span> */}
           </div>
         </div>
         <div>

@@ -126,8 +126,8 @@ function Form() {
                     Select Gender
                   </option> */}
                   <option value="none" className="text-gray-700" defaultValue>Select Gender</option>
-                  <option value="1">Male</option>
                   <option value="0">Female</option>
+                  <option value="1">Male</option>
                 </select>
               </div>
 
@@ -319,9 +319,10 @@ function Form() {
                   <option value="none" className="text-gray-700" defaultValue>
                     Select Thalassemia
                   </option>
-                  <option value="1">Normal</option>
-                  <option value="2">Fixed defect</option>
-                  <option value="3">Reversible defect</option>
+                  <option value="0">Normal</option>
+                  <option value="1">Fixed defect</option>
+                  <option value="2">Reversible defect</option>
+                  <option value="3">Unknown</option>
                 </select>
               </div>
             </div>

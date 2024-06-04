@@ -127,8 +127,19 @@ const predict = async (req, res) => {
 
     pythonProcess.on("exit", async (code) => {
       if (code === 0) {
+        const output ={};
         // Parse the output from the Python process if needed
-        const outputJson = JSON.parse(pythonOutput);
+        console.log(pythonOutput);
+        if(pythonOutput.includes("1")){
+          output.messageCode = 1;
+          output.message = "The person has a Heart Disease";
+        }
+        else{
+          output.messageCode = 0;
+          output.message = "The person does not have a Heart Disease";
+        }
+        // const outputJson = JSON.parse(pythonOutput);
+        // console.log(outputJson);
 
         const heartData = await Heart.create({
           age: formData.age,
@@ -144,7 +155,7 @@ const predict = async (req, res) => {
           slope: formData.slope,
           ca: formData.ca,
           thal: formData.thal,
-          target: outputJson.messageCode,
+          target: output.messageCode,
         });
 
         user.previousResults.push(heartData._id);
@@ -154,8 +165,9 @@ const predict = async (req, res) => {
         res.status(200).json({
           success: true,
           userId,
+          heartData,
           message: "Prediction done",
-          prediction: outputJson,
+          prediction: output,
         });
       } else {
         // Return status code and error message
