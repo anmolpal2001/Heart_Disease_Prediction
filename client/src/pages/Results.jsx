@@ -46,6 +46,7 @@ val:{
     };
     getAllData()
       .then((res) => {
+        console.log(res);
         res.previousResults.map((item) => {
           const date = item.createdAt;
           const reportId = item._id;
@@ -101,14 +102,17 @@ val:{
 
           const ca = item.ca;
           let thal;
-          if (item.thal === "1") {
+          if (item.thal === "0") {
             thal = "Normal";
           }
-          if (item.thal === "2") {
+          if (item.thal === "1") {
             thal = "Fixed defect";
           }
-          if (item.thal === "3") {
+          if (item.thal === "2") {
             thal = "Reversible defect";
+          }
+          if(item.thal === "3"){
+            thal = "Unknown"
           }
           let val = {
             sex,
@@ -129,13 +133,15 @@ val:{
           temp.push({ date, reportId, val });
         });
         setResultData(temp);
+        temp = [];
         setLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
-
+    }, []);
+    console.log("Reseults", resultData);
+    
   const [openIndex, setOpenIndex] = useState(-1);
   const toggle = (index) => {
     if (index === openIndex) {
