@@ -78,7 +78,11 @@ const Navbar = () => {
                 to="sign-in"
                 className="text-white bg-[#2A8683]  font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
               >
+<<<<<<< HEAD
+              Login
+=======
                 Login
+>>>>>>> c78cff57970c0dad717858f66615dedf5947ffe8
               </Link>
             </div>
           )}

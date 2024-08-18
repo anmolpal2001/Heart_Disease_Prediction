@@ -5,6 +5,27 @@ import AccordionComponent from "../components/AccordionComponent";
 import {outputClear} from "../redux/output/outputSlice";
 
 function Results() {
+  const DUMMY=[{
+reportId:'#DFGHJK',
+date:'bdhbashbaisd',
+val:{
+  age: 62,
+            sex: 0,
+            cp: 0,
+            trestbps: 138,
+            cholesterol: 294,
+            fbs: 1,
+            restecg: 1,
+            thalach: 106,
+            exang: 0,
+            oldpeak: 1.9,
+            slope: 1,
+            ca: 3,
+            thal: 2,
+
+}
+// val:
+  }]
   const currentUser = useSelector((state) => state.auth.currentUser);
   const [resultData, setResultData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -135,11 +156,11 @@ function Results() {
       <div className="bg-[#F7F7F7] lg:px-6 py-2.5 min-h-screen">
         <div className="mx-auto max-w-screen-2xl lg:mx-20 flex flex-col justify-center items-center">
           <div className="sm:px-4 lg:px-14 max-w-screen-2xl w-full mx-auto">
-            {loading && <p className="text-center my-10 text-xl">Loading...</p>}
+            {/* {loading && <p className="text-center my-10 text-xl">Loading...</p>}
             {!loading && resultData.length === 0 && <p className="text-center my-10 text-xl">No result found</p>}
-            {!loading &&
-              resultData.length > 0 &&
-              resultData.map((item, index) => (
+            {!loading && */}
+             { DUMMY.length > 0 &&
+              DUMMY.map((item, index) => (
                 <div key={index}>
                   <AccordionComponent
                     toggleResult={toggle}
@@ -150,7 +171,8 @@ function Results() {
                     reportId={item.reportId}
                   />
                 </div>
-              ))}
+              ))
+             }
           </div>
         </div>
       </div>
