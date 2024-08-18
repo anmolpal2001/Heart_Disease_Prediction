@@ -54,7 +54,8 @@ function Profile() {
             <div className="text-center my-8">
               <div className="flex justify-center items-center">
                 <img
-                  className="h-40 w-40 object-cover rounded-full bg-white border-[#1ccfc9] border-8"
+                  className="h-40 w-40 object-cover rounded-full bg-white"
+                  // className="h-40 w-40 object-cover rounded-full bg-white border-[#1ccfc9] border-8"
                   src={currentUser.sendData.profilePic}
                 ></img>
               </div>

@@ -214,7 +214,7 @@ function Form() {
                     Select RES
                   </option>
                   <option value="0">Normal</option>
-                  <option value="1">Having ST-T Wase Abnormality</option>
+                  <option value="1">Having ST-T Wave Abnormality</option>
                   <option value="2">showing Probable </option>
                 </select>
               </div>
